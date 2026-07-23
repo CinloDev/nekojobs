@@ -3,6 +3,9 @@
 import { WidgetCard } from '@/design-system/components/WidgetCard';
 import { useJobStore } from '@/features/applications/store/useJobStore';
 import { Activity, Clock } from 'lucide-react';
+import { statusTextStyles, statusBgStyles } from '@/design-system/components/StatusBadge';
+import { cn } from '@/lib/utils';
+import { ApplicationStatus } from '@/types';
 
 export function RecentActivityWidget() {
   const { applications } = useJobStore();
@@ -32,7 +35,7 @@ export function RecentActivityWidget() {
           <div className="absolute left-[11px] top-2 bottom-2 w-px bg-border-default"></div>
           {recentActivity.map((app) => (
             <div key={app.id} className="relative pl-6 pb-4 last:pb-0">
-              <div className="absolute left-[-5px] top-1.5 w-2 h-2 rounded-pill bg-brand-primary ring-4 ring-background"></div>
+              <div className={cn("absolute left-[-5px] top-1.5 w-2 h-2 rounded-pill ring-4 ring-background", statusBgStyles[app.status as ApplicationStatus] || "bg-brand-primary")}></div>
               <div className="flex flex-col gap-xs">
                 <div className="flex items-center justify-between">
                   <p className="text-body-sm font-medium">{app.company}</p>
@@ -41,7 +44,7 @@ export function RecentActivityWidget() {
                     {formatRelativeTime(app.updatedAt)}
                   </span>
                 </div>
-                <p className="text-caption text-text-secondary">Estado actualizado a <span className="font-medium text-text-primary">{app.status}</span></p>
+                <p className="text-caption text-text-secondary">Estado actualizado a <span className={cn("font-medium", statusTextStyles[app.status as ApplicationStatus] || "text-text-primary")}>{app.status}</span></p>
               </div>
             </div>
           ))}

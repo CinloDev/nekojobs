@@ -5,9 +5,9 @@
 
 :root {
   /* Brand */
-  --ds-color-brand-primary: #7C3AED;
-  --ds-color-brand-hover: #6D28D9;
-  --ds-color-brand-active: #5B21B6;
+  --ds-color-brand-primary: #6D28D9;
+  --ds-color-brand-hover: #5B21B6;
+  --ds-color-brand-active: #4C1D95;
   --ds-color-brand-soft: #F3E8FF;
   --ds-color-brand-secondary: #18181B;
   --ds-color-brand-accent: #38BDF8;
@@ -22,7 +22,7 @@
   /* Text */
   --ds-color-text-primary: #09090B;
   --ds-color-text-secondary: #52525B;
-  --ds-color-text-muted: #A1A1AA;
+  --ds-color-text-muted: #71717A;
   --ds-color-text-inverse: #FFFFFF;
 
   /* Borders */
@@ -70,7 +70,7 @@
   /* Text */
   --ds-color-text-primary: #FAFAFA;
   --ds-color-text-secondary: #A1A1AA;
-  --ds-color-text-muted: #52525B;
+  --ds-color-text-muted: #71717A;
   --ds-color-text-inverse: #09090B;
 
   /* Borders */
