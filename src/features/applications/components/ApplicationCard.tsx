@@ -1,6 +1,6 @@
 import { Application, ApplicationStatus } from '@/types';
 import { Card, CardContent } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
+
 import { MoreHorizontal, Edit, Trash2, ExternalLink, Calendar, Building2, Laptop, Banknote } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { buttonVariants } from '@/components/ui/button';
@@ -12,20 +12,7 @@ interface ApplicationCardProps {
   onDelete: (id: string) => void;
 }
 
-const getStatusColor = (status: ApplicationStatus) => {
-  switch (status) {
-    case 'Guardada': return 'bg-slate-100 text-slate-700 hover:bg-slate-200 dark:bg-slate-800 dark:text-slate-300';
-    case 'Aplicada': return 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300';
-    case 'Contactado': return 'bg-yellow-100 text-yellow-700 hover:bg-yellow-200 dark:bg-yellow-900/30 dark:text-yellow-300';
-    case 'Entrevista RRHH':
-    case 'Entrevista técnica': return 'bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300';
-    case 'Prueba técnica': return 'bg-indigo-100 text-indigo-700 hover:bg-indigo-200 dark:bg-indigo-900/30 dark:text-indigo-300';
-    case 'Oferta': return 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300';
-    case 'Rechazada':
-    case 'Ghosting': return 'bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300';
-    default: return 'bg-secondary text-secondary-foreground';
-  }
-};
+import { StatusBadge } from '@/design-system/components/StatusBadge';
 
 export function ApplicationCard({ application, onEdit, onDelete }: ApplicationCardProps) {
   const formattedDate = new Date(application.appliedAt).toLocaleDateString('es-ES', {
@@ -43,9 +30,7 @@ export function ApplicationCard({ application, onEdit, onDelete }: ApplicationCa
               <h3 className="font-semibold text-lg truncate" title={application.position}>
                 {application.position}
               </h3>
-              <Badge variant="secondary" className={`whitespace-nowrap rounded-md font-medium border-0 px-2 py-0.5 text-xs ${getStatusColor(application.status)}`}>
-                {application.status}
-              </Badge>
+              <StatusBadge status={application.status} />
             </div>
             
             <div className="flex items-center text-muted-foreground gap-1.5 text-sm">
@@ -99,12 +84,12 @@ export function ApplicationCard({ application, onEdit, onDelete }: ApplicationCa
         {application.technologies && application.technologies.length > 0 && (
           <div className="mt-3 flex flex-wrap gap-1">
             {application.technologies.slice(0, 3).map(tech => (
-              <span key={tech} className="inline-flex items-center rounded-sm bg-accent px-1.5 py-0.5 text-[10px] font-medium text-accent-foreground">
+              <span key={tech} className="inline-flex items-center rounded-sm bg-accent px-1.5 py-0.5 text-caption font-medium text-accent-foreground">
                 {tech}
               </span>
             ))}
             {application.technologies.length > 3 && (
-              <span className="inline-flex items-center rounded-sm bg-accent/50 px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground">
+              <span className="inline-flex items-center rounded-sm bg-accent/50 px-1.5 py-0.5 text-caption font-medium text-muted-foreground">
                 +{application.technologies.length - 3}
               </span>
             )}
