@@ -1,0 +1,29 @@
+/* 
+ * NekoJobs Typography Tokens
+ * Prefix: --ds-font-
+ */
+
+:root {
+  /* Font families */
+  --ds-font-sans: var(--font-sans);
+  --ds-font-mono: var(--font-geist-mono);
+
+  /* Font Sizes */
+  --ds-text-display: 3.5rem;     /* 56px */
+  --ds-text-heading-xl: 2.5rem;  /* 40px */
+  --ds-text-heading-lg: 1.75rem; /* 28px */
+  --ds-text-heading-md: 1.25rem; /* 20px */
+  --ds-text-heading-sm: 1.125rem;/* 18px */
+  
+  --ds-text-body-lg: 1.125rem;   /* 18px */
+  --ds-text-body-md: 1rem;       /* 16px */
+  --ds-text-body-sm: 0.875rem;   /* 14px */
+  
+  --ds-text-caption: 0.75rem;    /* 12px */
+  --ds-text-mono: 0.875rem;      /* 14px */
+
+  /* Line Heights */
+  --ds-leading-display: 1.1;
+  --ds-leading-heading: 1.25;
+  --ds-leading-body: 1.5;
+}

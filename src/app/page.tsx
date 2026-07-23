@@ -1,5 +1,9 @@
-import { Overview } from '@/features/dashboard/components/Overview';
+import { HomeView } from "@/features/home/components/HomeView";
 
 export default function Home() {
-  return <Overview />;
+  return (
+    <div className="min-h-full h-full">
+      <HomeView />
+    </div>
+  );
 }

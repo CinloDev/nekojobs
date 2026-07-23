@@ -10,10 +10,10 @@ export function EmptyState({ onAction }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center rounded-xl border border-dashed p-12 text-center bg-card shadow-sm">
       <div className="mb-4 flex justify-center">
-        <Image src="/neko_logo.svg" alt="NekoJobs" width={64} height={64} className="opacity-90" />
+        <Image src="/nekojobs.svg" alt="NekoJobs" width={64} height={64} className="opacity-90" />
       </div>
       <h3 className="mt-2 text-lg font-semibold">Todavía no tenés postulaciones</h3>
-      <p className="mt-1 text-sm text-muted-foreground max-w-sm">
+      <p className="mt-1 text-sm text-muted-foreground w-full max-w-[400px] text-balance">
         Empezá registrando tu primera oportunidad laboral y toma el control de tu búsqueda.
       </p>
       {onAction && (

@@ -1,0 +1,99 @@
+/* 
+ * NekoJobs Color Tokens
+ * Prefix: --ds-color-
+ */
+
+:root {
+  /* Brand */
+  --ds-color-brand-primary: #6D28D9;
+  --ds-color-brand-hover: #5B21B6;
+  --ds-color-brand-active: #4C1D95;
+  --ds-color-brand-soft: #F3E8FF;
+  --ds-color-brand-secondary: #18181B;
+  --ds-color-brand-accent: #38BDF8;
+
+  /* Neutral Backgrounds */
+  --ds-color-background: #F4F4F5;
+  --ds-color-surface: #FFFFFF;
+  --ds-color-surface-elevated: #FFFFFF;
+  --ds-color-sidebar: #F6F6F7;
+  --ds-color-muted: #F3F4F6;
+
+  /* Text */
+  --ds-color-text-primary: #09090B;
+  --ds-color-text-secondary: #52525B;
+  --ds-color-text-muted: #71717A;
+  --ds-color-text-inverse: #FFFFFF;
+
+  /* Borders */
+  --ds-color-border-default: #E4E4E7;
+  --ds-color-border-hover: #D4D4D8;
+  --ds-color-border-strong: #A1A1AA;
+  --ds-color-border-focus: #7C3AED;
+
+  /* Feedback */
+  --ds-color-feedback-success: #10B981;
+  --ds-color-feedback-warning: #F59E0B;
+  --ds-color-feedback-danger: #EF4444;
+  --ds-color-feedback-info: #3B82F6;
+
+  /* Status Colors */
+  --ds-color-status-saved: #9CA3AF;
+  --ds-color-status-applied: #3B82F6;
+  --ds-color-status-hr: #6366F1;
+  --ds-color-status-technical: #7C3AED;
+  --ds-color-status-test: #F59E0B;
+  --ds-color-status-final: #4C1D95;
+  --ds-color-status-offer: #10B981;
+  --ds-color-status-hired: #059669;
+  --ds-color-status-rejected: #EF4444;
+  --ds-color-status-ghosted: #6B7280;
+}
+
+/* Dark Mode Tokens */
+.dark {
+  /* Brand */
+  --ds-color-brand-primary: #8B5CF6; /* slightly lighter for dark mode contrast */
+  --ds-color-brand-hover: #A78BFA;
+  --ds-color-brand-active: #C4B5FD;
+  --ds-color-brand-soft: #4C1D95; /* dark soft background */
+  --ds-color-brand-secondary: #FAFAFA;
+  --ds-color-brand-accent: #38BDF8;
+
+  /* Neutral Backgrounds */
+  --ds-color-background: #09090B; /* Deep near-black */
+  --ds-color-surface: #18181B; /* Zinc 900 */
+  --ds-color-surface-elevated: #27272A; /* Zinc 800 */
+  --ds-color-sidebar: #09090B;
+  --ds-color-muted: #27272A;
+
+  /* Text */
+  --ds-color-text-primary: #FAFAFA;
+  --ds-color-text-secondary: #A1A1AA;
+  --ds-color-text-muted: #71717A;
+  --ds-color-text-inverse: #09090B;
+
+  /* Borders */
+  --ds-color-border-default: #27272A;
+  --ds-color-border-hover: #3F3F46;
+  --ds-color-border-strong: #52525B;
+  --ds-color-border-focus: #8B5CF6;
+
+  /* Feedback */
+  --ds-color-feedback-success: #10B981;
+  --ds-color-feedback-warning: #F59E0B;
+  --ds-color-feedback-danger: #EF4444;
+  --ds-color-feedback-info: #3B82F6;
+
+  /* Status Colors */
+  --ds-color-status-saved: #6B7280;
+  --ds-color-status-applied: #3B82F6;
+  --ds-color-status-hr: #6366F1;
+  --ds-color-status-technical: #8B5CF6;
+  --ds-color-status-test: #F59E0B;
+  --ds-color-status-final: #C4B5FD;
+  --ds-color-status-offer: #10B981;
+  --ds-color-status-hired: #059669;
+  --ds-color-status-rejected: #EF4444;
+  --ds-color-status-ghosted: #374151;
+}

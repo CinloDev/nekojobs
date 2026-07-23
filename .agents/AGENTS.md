@@ -26,7 +26,7 @@ El código está organizado por *features*. **No** agrupes todo en una carpeta g
 - **Manejo de Fechas:** Las fechas deben persistirse y enviarse siempre como **ISO strings** (ej. `appliedAt: string`) para evitar bugs de serialización en JSON. Convertir a objeto `Date` solo al momento de renderizar o calcular.
 
 ## 5. Decisiones de Diseño y UI
-- **Light Mode Default:** La aplicación prioriza un tema claro con tonos blancos, grises, bordes muy suaves y un **acento color violeta** (`violet-600` equivalente).
+- **Light Mode Default:** La aplicación prioriza un tema claro con tonos blancos, grises, bordes muy suaves y un **acento color violeta** (`violet-700` equivalente, optimizado para legibilidad y accesibilidad).
 - Evitar interfaces saturadas de color; priorizar limpieza visual, micro-animaciones (Framer Motion) y jerarquía clara.
 
 ## 6. Funcionalidad de "Modo Demo"
