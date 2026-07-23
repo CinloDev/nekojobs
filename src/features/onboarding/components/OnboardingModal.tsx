@@ -5,20 +5,21 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, Di
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
+import { useUserStore } from '@/store/useUserStore';
 
 export function OnboardingModal() {
+  const { hasSeenOnboarding, completeOnboarding, config, updateConfig } = useUserStore();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
     // Basic check to see if we should show onboarding
-    const hasSeenOnboarding = localStorage.getItem('nekojobs_onboarding');
     if (!hasSeenOnboarding) {
       setTimeout(() => setOpen(true), 0);
     }
-  }, []);
+  }, [hasSeenOnboarding]);
 
   const handleComplete = () => {
-    localStorage.setItem('nekojobs_onboarding', 'true');
+    completeOnboarding();
     setOpen(false);
   };
 
@@ -46,7 +47,11 @@ export function OnboardingModal() {
           </div>
           <div className="space-y-2">
             <h4 className="font-medium text-sm">Objetivo semanal de postulaciones</h4>
-            <Input type="number" defaultValue={20} />
+            <Input 
+              type="number" 
+              value={config.weeklyGoal} 
+              onChange={(e) => updateConfig({ weeklyGoal: Number(e.target.value) })}
+            />
           </div>
         </div>
         <DialogFooter>

@@ -2,12 +2,12 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, Briefcase, BarChart2, Target, BookOpen, Settings } from 'lucide-react';
+import { Home, Briefcase, BarChart2, Target, BookOpen, Settings } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Resumen', href: '/', icon: LayoutDashboard },
+  { name: 'Home', href: '/', icon: Home },
   { name: 'Postulaciones', href: '/applications', icon: Briefcase },
   { name: 'Estadísticas', href: '/analytics', icon: BarChart2 },
   { name: 'Metas', href: '/goals', icon: Target },
