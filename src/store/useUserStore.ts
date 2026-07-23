@@ -1,36 +1,43 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
-
-export interface UserConfig {
-  name: string;
-  startDate: string | null;
-  weeklyGoal: number;
-}
+import { UserProfile } from '@/types';
+import { LocalUserRepository } from '@/services/LocalUserRepository';
 
 interface UserState {
-  config: UserConfig;
-  updateConfig: (config: Partial<UserConfig>) => void;
-  hasSeenOnboarding: boolean;
-  completeOnboarding: () => void;
+  profile: UserProfile | null;
+  isLoading: boolean;
+  error: string | null;
+  
+  loadProfile: () => Promise<void>;
+  updateProfile: (updates: Partial<UserProfile>) => Promise<void>;
 }
 
-export const useUserStore = create<UserState>()(
-  persist(
-    (set) => ({
-      config: {
-        name: 'Cinlo', // Default, could be asked in onboarding
-        startDate: new Date().toISOString(),
-        weeklyGoal: 20,
-      },
-      hasSeenOnboarding: false,
-      updateConfig: (newConfig) =>
-        set((state) => ({
-          config: { ...state.config, ...newConfig },
-        })),
-      completeOnboarding: () => set({ hasSeenOnboarding: true }),
-    }),
-    {
-      name: 'nekojobs-user-config',
+const repository = new LocalUserRepository();
+
+export const useUserStore = create<UserState>((set, get) => ({
+  profile: null,
+  isLoading: false,
+  error: null,
+  
+  loadProfile: async () => {
+    set({ isLoading: true, error: null });
+    try {
+      const profile = await repository.getProfile();
+      set({ profile, isLoading: false });
+    } catch (error) {
+      set({ error: 'Error loading profile', isLoading: false });
     }
-  )
-);
+  },
+
+  updateProfile: async (updates: Partial<UserProfile>) => {
+    try {
+      const currentProfile = get().profile;
+      if (!currentProfile) return;
+      
+      const updatedProfile = { ...currentProfile, ...updates };
+      await repository.saveProfile(updatedProfile);
+      set({ profile: updatedProfile });
+    } catch (error) {
+      set({ error: 'Error updating profile' });
+    }
+  }
+}));
