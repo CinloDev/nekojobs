@@ -33,7 +33,8 @@ export function Overview() {
         </div>
       </div>
     );
-  } 3: 11 AM
+  }
+
 
   const totalApps = applications.length;
   const interviews = applications.filter(a => a.status.includes('Entrevista')).length;
