@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -9,6 +9,18 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Application, ApplicationStatus, ApplicationSource, Modality } from '@/types';
 import { useJobStore } from '../store/useJobStore';
+import { 
+  Building2, 
+  Briefcase, 
+  Activity, 
+  Globe2, 
+  Link as LinkIcon, 
+  MapPin, 
+  DollarSign, 
+  Code2, 
+  FileText,
+  Sparkles
+} from 'lucide-react';
 
 interface ApplicationFormModalProps {
   open: boolean;
@@ -93,36 +105,61 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[525px] max-h-[90vh] overflow-y-auto">
+      <DialogContent className="sm:max-w-[550px]">
         <DialogHeader>
-          <DialogTitle>{applicationToEdit ? 'Editar Postulación' : 'Nueva Postulación'}</DialogTitle>
+          <div className="flex items-center gap-3">
+            <div className="p-2 bg-primary/10 rounded-xl text-primary ring-1 ring-primary/20">
+              <Sparkles className="w-5 h-5" />
+            </div>
+            <div>
+              <DialogTitle className="text-xl text-primary">
+                {applicationToEdit ? 'Editar Postulación' : 'Nueva Postulación'}
+              </DialogTitle>
+              <DialogDescription className="text-sm mt-1">
+                {applicationToEdit ? 'Actualiza los datos de tu búsqueda' : 'Registra una nueva oportunidad laboral en tu pipeline.'}
+              </DialogDescription>
+            </div>
+          </div>
         </DialogHeader>
         
-        <form onSubmit={handleSubmit} className="space-y-4 py-4">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
+          {/* Section 1: Basic Info */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="company">Empresa *</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="company" className="flex items-center gap-2 text-muted-foreground font-medium">
+                <Building2 className="w-4 h-4 text-primary/70" />
+                Empresa *
+              </Label>
               <Input 
                 id="company" 
                 required 
                 value={formData.company} 
-                onChange={(e) => updateField('company', e.target.value)} 
+                onChange={(e) => updateField('company', e.target.value)}
+                placeholder="Ej. Google"
               />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="position">Posición *</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="position" className="flex items-center gap-2 text-muted-foreground font-medium">
+                <Briefcase className="w-4 h-4 text-primary/70" />
+                Posición *
+              </Label>
               <Input 
                 id="position" 
                 required 
                 value={formData.position} 
                 onChange={(e) => updateField('position', e.target.value)} 
+                placeholder="Ej. Frontend Developer"
               />
             </div>
           </div>
 
+          {/* Section 2: Status & Source */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Estado *</Label>
+            <div className="space-y-1.5">
+              <Label className="flex items-center gap-2 text-muted-foreground font-medium">
+                <Activity className="w-4 h-4 text-primary/70" />
+                Estado *
+              </Label>
               <Select value={formData.status} onValueChange={(val) => updateField('status', val as string)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Seleccionar estado" />
@@ -132,8 +169,11 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
                 </SelectContent>
               </Select>
             </div>
-            <div className="space-y-2">
-              <Label>Fuente *</Label>
+            <div className="space-y-1.5">
+              <Label className="flex items-center gap-2 text-muted-foreground font-medium">
+                <Globe2 className="w-4 h-4 text-primary/70" />
+                Fuente *
+              </Label>
               <Select value={formData.source} onValueChange={(val) => updateField('source', val as string)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Seleccionar fuente" />
@@ -145,20 +185,28 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="url">URL de la oferta</Label>
+          {/* Section 3: URL */}
+          <div className="space-y-1.5">
+            <Label htmlFor="url" className="flex items-center gap-2 text-muted-foreground font-medium">
+              <LinkIcon className="w-4 h-4 text-primary/70" />
+              URL de la oferta
+            </Label>
             <Input 
               id="url" 
               type="url" 
-              placeholder="https://..."
+              placeholder="https://linkedin.com/jobs/..."
               value={formData.url} 
               onChange={(e) => updateField('url', e.target.value)} 
             />
           </div>
 
+          {/* Section 4: Details */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label>Modalidad</Label>
+            <div className="space-y-1.5">
+              <Label className="flex items-center gap-2 text-muted-foreground font-medium">
+                <MapPin className="w-4 h-4 text-primary/70" />
+                Modalidad
+              </Label>
               <Select value={formData.modality} onValueChange={(val) => updateField('modality', val as string)}>
                 <SelectTrigger>
                   <SelectValue placeholder="Seleccionar modalidad" />
@@ -168,8 +216,11 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
                 </SelectContent>
               </Select>
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="salary">Salario (Opcional)</Label>
+            <div className="space-y-1.5">
+              <Label htmlFor="salary" className="flex items-center gap-2 text-muted-foreground font-medium">
+                <DollarSign className="w-4 h-4 text-primary/70" />
+                Salario
+              </Label>
               <Input 
                 id="salary" 
                 placeholder="Ej: $3000 USD"
@@ -179,8 +230,12 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
             </div>
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="technologies">Tecnologías (separadas por coma)</Label>
+          {/* Section 5: Technologies */}
+          <div className="space-y-1.5">
+            <Label htmlFor="technologies" className="flex items-center gap-2 text-muted-foreground font-medium">
+              <Code2 className="w-4 h-4 text-primary/70" />
+              Tecnologías
+            </Label>
             <Input 
               id="technologies" 
               placeholder="React, TypeScript, Node.js"
@@ -189,18 +244,22 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
             />
           </div>
 
-          <div className="space-y-2">
-            <Label htmlFor="notes">Notas adicionales</Label>
+          {/* Section 6: Notes */}
+          <div className="space-y-1.5">
+            <Label htmlFor="notes" className="flex items-center gap-2 text-muted-foreground font-medium">
+              <FileText className="w-4 h-4 text-primary/70" />
+              Notas
+            </Label>
             <Textarea 
               id="notes" 
-              placeholder="Entrevistador fue muy amable, repasar algoritmos..."
-              className="resize-none h-20"
+              placeholder="El entrevistador fue amable..."
+              className="resize-none min-h-[60px]"
               value={formData.notes || ''} 
               onChange={(e) => updateField('notes', e.target.value)} 
             />
           </div>
 
-          <DialogFooter className="pt-4">
+          <DialogFooter className="mt-4">
             <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
               Cancelar
             </Button>

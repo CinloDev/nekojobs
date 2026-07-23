@@ -10,7 +10,7 @@ export function TopHeader() {
         {/* Mocked User Profile for now */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-end">
-            <span className="text-sm font-medium leading-none">Invitado</span>
+            <span className="text-sm font-medium leading-none text-primary">Invitado</span>
             <span className="text-xs text-muted-foreground mt-1">Desarrollador</span>
           </div>
           <div className="h-9 w-9 rounded-full overflow-hidden bg-muted flex items-center justify-center border">
