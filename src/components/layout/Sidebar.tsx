@@ -7,12 +7,12 @@ import { cn } from '@/lib/utils';
 import Image from 'next/image';
 
 const navigation = [
-  { name: 'Overview', href: '/', icon: LayoutDashboard },
-  { name: 'Applications', href: '/applications', icon: Briefcase },
-  { name: 'Analytics', href: '/analytics', icon: BarChart2 },
-  { name: 'Goals', href: '/goals', icon: Target },
-  { name: 'Learnings', href: '/learnings', icon: BookOpen },
-  { name: 'Settings', href: '/settings', icon: Settings },
+  { name: 'Resumen', href: '/', icon: LayoutDashboard },
+  { name: 'Postulaciones', href: '/applications', icon: Briefcase },
+  { name: 'Estadísticas', href: '/analytics', icon: BarChart2 },
+  { name: 'Metas', href: '/goals', icon: Target },
+  { name: 'Aprendizajes', href: '/learnings', icon: BookOpen },
+  { name: 'Configuración', href: '/settings', icon: Settings },
 ];
 
 export function Sidebar() {
@@ -21,10 +21,10 @@ export function Sidebar() {
   return (
     <div className="flex h-full w-64 flex-col border-r bg-background">
       <div className="flex h-16 items-center px-6 border-b">
-        <span className="text-xl font-bold text-primary flex items-center gap-2">
+        <Link href="/" className="text-xl font-bold text-primary flex items-center gap-2 transition-opacity hover:opacity-80">
           <Image src="/neko_logo.svg" alt="NekoJobs Logo" width={28} height={28} />
           NekoJobs
-        </span>
+        </Link>
       </div>
       <div className="flex-1 overflow-y-auto py-4">
         <nav className="space-y-1 px-3">

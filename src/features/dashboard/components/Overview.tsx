@@ -20,7 +20,7 @@ export function Overview() {
     return (
       <div className="p-8 max-w-4xl mx-auto space-y-8 mt-8">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Overview</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Resumen</h2>
           <p className="text-muted-foreground mt-2">Bienvenido a tu tablero de búsqueda laboral.</p>
         </div>
         <EmptyState onAction={() => alert('Función de agregar próxima a implementarse en el MVP v2')} />
@@ -35,6 +35,7 @@ export function Overview() {
     );
   }
 
+
   const totalApps = applications.length;
   const interviews = applications.filter(a => a.status.includes('Entrevista')).length;
   const technicals = applications.filter(a => a.status === 'Prueba técnica').length;
@@ -44,7 +45,7 @@ export function Overview() {
     <div className="p-8 space-y-8 max-w-6xl mx-auto">
       <div className="flex items-center justify-between space-y-2">
         <div>
-          <h2 className="text-3xl font-bold tracking-tight">Overview</h2>
+          <h2 className="text-3xl font-bold tracking-tight">Resumen</h2>
           <p className="text-muted-foreground mt-2">
             Hola 👋 Aquí tienes el resumen de tu búsqueda laboral.
           </p>
@@ -93,7 +94,7 @@ export function Overview() {
           </CardContent>
         </Card>
       </div>
-      
+
       <Card>
         <CardHeader>
           <CardTitle>Actividad Reciente</CardTitle>
