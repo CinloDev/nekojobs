@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { WidgetCard } from '@/design-system/components/WidgetCard';
 import { Progress } from '@/components/ui/progress';
 import { useUserStore } from '@/store/useUserStore';
 import { useJobStore } from '@/features/applications/store/useJobStore';
@@ -27,26 +27,19 @@ export function WeeklyGoalWidget() {
   const progressValue = Math.min((currentWeekApps / config.weeklyGoal) * 100, 100);
 
   return (
-    <Card className="flex flex-col h-full shadow-sm bg-card/50 backdrop-blur-sm border-muted/50">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground uppercase tracking-wider">
-          Objetivo Semanal
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="flex-1 flex flex-col justify-center gap-4">
-        <div className="flex items-end justify-between">
-          <div className="space-y-1">
-            <h3 className="text-2xl font-bold">{currentWeekApps} <span className="text-sm font-normal text-muted-foreground">/ {config.weeklyGoal}</span></h3>
-            <p className="text-sm text-muted-foreground">Postulaciones</p>
-          </div>
-          <div className="text-right">
-            <span className="text-xs font-semibold px-2 py-1 bg-primary/10 text-primary rounded-md">
-              {Math.round(progressValue)}%
-            </span>
-          </div>
+    <WidgetCard title="Objetivo Semanal" contentClassName="flex-1 flex flex-col justify-center gap-md">
+      <div className="flex items-end justify-between">
+        <div className="space-y-1">
+          <h3 className="text-heading-lg font-bold">{currentWeekApps} <span className="text-body-sm font-normal text-text-secondary">/ {config.weeklyGoal}</span></h3>
+          <p className="text-body-sm text-text-secondary">Postulaciones</p>
         </div>
-        <Progress value={progressValue} className="h-2" />
-      </CardContent>
-    </Card>
+        <div className="text-right">
+          <span className="text-caption font-semibold px-2 py-1 bg-brand-primary/10 text-brand-primary rounded-md">
+            {Math.round(progressValue)}%
+          </span>
+        </div>
+      </div>
+      <Progress value={progressValue} className="h-2" />
+    </WidgetCard>
   );
 }

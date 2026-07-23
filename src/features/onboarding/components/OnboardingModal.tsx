@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import Image from 'next/image';
 import { useUserStore } from '@/store/useUserStore';
 
@@ -38,12 +39,17 @@ export function OnboardingModal() {
         <div className="py-4 space-y-4">
           <div className="space-y-2">
             <h4 className="font-medium text-sm">¿Cuánto tiempo llevás buscando?</h4>
-            <select className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50">
-              <option value="1">Menos de un mes</option>
-              <option value="2">1-3 meses</option>
-              <option value="3">3-6 meses</option>
-              <option value="4">Más de 6 meses</option>
-            </select>
+            <Select defaultValue="1">
+              <SelectTrigger>
+                <SelectValue placeholder="Selecciona el tiempo" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="1">Menos de un mes</SelectItem>
+                <SelectItem value="2">1-3 meses</SelectItem>
+                <SelectItem value="3">3-6 meses</SelectItem>
+                <SelectItem value="4">Más de 6 meses</SelectItem>
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-2">
             <h4 className="font-medium text-sm">Objetivo semanal de postulaciones</h4>

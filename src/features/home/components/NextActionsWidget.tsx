@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { WidgetCard } from '@/design-system/components/WidgetCard';
 import { useJobStore } from '@/features/applications/store/useJobStore';
 import { Target, ArrowRight, Code, MessageSquare, Send, type LucideIcon } from 'lucide-react';
 
@@ -70,28 +70,20 @@ export function NextActionsWidget() {
   }, [applications]);
 
   return (
-    <Card className="h-full shadow-sm bg-card/50 backdrop-blur-sm border-muted/50">
-      <CardHeader className="pb-4 border-b border-border/50">
-        <CardTitle className="flex items-center gap-2 text-base font-semibold">
-          <Target className="w-5 h-5 text-primary" />
-          🎯 Hoy
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="pt-4">
-        <ul className="space-y-4">
-          {actions.map((action) => (
-            <li key={action.id} className="flex items-start gap-3 group cursor-pointer">
-              <div className="mt-0.5 bg-primary/10 p-1.5 rounded-md text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                <action.icon className="w-4 h-4" />
-              </div>
-              <div className="flex-1">
-                <p className="text-sm font-medium leading-none mb-1 group-hover:text-primary transition-colors">{action.text}</p>
-              </div>
-              <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity" />
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-    </Card>
+    <WidgetCard title="🎯 Hoy" icon={<Target className="w-5 h-5 text-brand-primary" />}>
+      <ul className="space-y-md">
+        {actions.map((action) => (
+          <li key={action.id} className="flex items-start gap-3 group cursor-pointer">
+            <div className="mt-0.5 bg-brand-primary/10 p-1.5 rounded-md text-brand-primary group-hover:bg-brand-primary group-hover:text-text-inverse transition-colors">
+              <action.icon className="w-4 h-4" />
+            </div>
+            <div className="flex-1">
+              <p className="text-body-sm font-medium leading-none mb-1 group-hover:text-brand-primary transition-colors">{action.text}</p>
+            </div>
+            <ArrowRight className="w-4 h-4 text-text-muted opacity-0 group-hover:opacity-100 transition-opacity" />
+          </li>
+        ))}
+      </ul>
+    </WidgetCard>
   );
 }

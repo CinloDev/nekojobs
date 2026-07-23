@@ -1,7 +1,7 @@
 'use client';
 
 import { useMemo } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { WidgetCard } from '@/design-system/components/WidgetCard';
 import { useJobStore } from '@/features/applications/store/useJobStore';
 import Image from 'next/image';
 
@@ -43,18 +43,16 @@ export function NekoInsightsWidget() {
   }, [applications]);
 
   return (
-    <Card className="h-full shadow-sm bg-gradient-to-br from-violet-500/10 via-transparent to-transparent border-violet-500/20">
-      <CardContent className="p-5 flex gap-4 items-start">
-        <div className="bg-violet-100 dark:bg-violet-900/30 p-2 rounded-xl flex-shrink-0">
-          <Image src="/nekojobs.svg" alt="Neko" width={32} height={32} className="opacity-80" />
-        </div>
-        <div>
-          <h3 className="font-semibold text-sm mb-1 text-violet-700 dark:text-violet-400">Neko dice:</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            {insightMessage}
-          </p>
-        </div>
-      </CardContent>
-    </Card>
+    <WidgetCard className="bg-brand-soft border-0 shadow-none" contentClassName="flex gap-md items-start pt-lg">
+      <div className="bg-brand-primary/10 p-sm rounded-lg flex-shrink-0">
+        <Image src="/nekojobs.svg" alt="Neko" width={32} height={32} className="opacity-90" />
+      </div>
+      <div>
+        <h3 className="font-semibold text-body-md mb-1 text-brand-primary">Neko dice:</h3>
+        <p className="text-body-sm text-text-secondary leading-relaxed">
+          {insightMessage}
+        </p>
+      </div>
+    </WidgetCard>
   );
 }

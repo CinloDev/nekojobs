@@ -5,7 +5,9 @@ export type ApplicationStatus =
   | 'Entrevista RRHH'
   | 'Entrevista técnica'
   | 'Prueba técnica'
+  | 'Entrevista Final'
   | 'Oferta'
+  | 'Contratado'
   | 'Rechazada'
   | 'Ghosting';
 
