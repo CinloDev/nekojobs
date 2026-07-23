@@ -25,7 +25,7 @@ export function HomeView() {
   }
 
   return (
-    <div className="p-8 max-w-[1400px] mx-auto min-h-full">
+    <div className="px-4 py-8 md:p-8 max-w-[1400px] mx-auto min-h-full">
       <HomeHeader />
 
       {/* General Metrics Row */}

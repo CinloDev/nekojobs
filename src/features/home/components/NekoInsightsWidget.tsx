@@ -43,12 +43,15 @@ export function NekoInsightsWidget() {
   }, [applications]);
 
   return (
-    <WidgetCard className="bg-brand-soft border-0 shadow-none" contentClassName="flex gap-md items-start pt-lg">
-      <div className="bg-brand-primary/10 p-sm rounded-lg flex-shrink-0">
-        <Image src="/nekojobs.svg" alt="Neko" width={32} height={32} className="opacity-90" />
+    <WidgetCard className="bg-brand-soft border-0 shadow-none" contentClassName="flex flex-col sm:flex-row gap-3 sm:gap-md items-start pt-lg">
+      <div className="flex items-center gap-3 sm:items-start">
+        <div className="bg-brand-primary/10 p-sm rounded-lg flex-shrink-0">
+          <Image src="/nekojobs.svg" alt="Neko" width={32} height={32} className="opacity-90" />
+        </div>
+        <h3 className="sm:hidden font-semibold text-body-md text-brand-primary">Neko dice:</h3>
       </div>
       <div>
-        <h3 className="font-semibold text-body-md mb-1 text-brand-primary">Neko dice:</h3>
+        <h3 className="hidden sm:block font-semibold text-body-md mb-1 text-brand-primary">Neko dice:</h3>
         <p className="text-body-sm text-text-secondary leading-relaxed">
           {insightMessage}
         </p>

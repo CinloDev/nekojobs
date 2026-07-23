@@ -7,6 +7,34 @@ interface StatusBadgeProps {
   className?: string;
 }
 
+export const statusTextStyles: Record<ApplicationStatus, string> = {
+  'Guardada': 'text-status-saved',
+  'Aplicada': 'text-status-applied',
+  'Contactado': 'text-status-applied',
+  'Entrevista RRHH': 'text-status-hr',
+  'Entrevista técnica': 'text-status-technical',
+  'Prueba técnica': 'text-status-test',
+  'Entrevista Final': 'text-status-final',
+  'Oferta': 'text-status-offer',
+  'Contratado': 'text-status-hired',
+  'Rechazada': 'text-status-rejected',
+  'Ghosting': 'text-status-ghosted',
+};
+
+export const statusBgStyles: Record<ApplicationStatus, string> = {
+  'Guardada': 'bg-status-saved',
+  'Aplicada': 'bg-status-applied',
+  'Contactado': 'bg-status-applied',
+  'Entrevista RRHH': 'bg-status-hr',
+  'Entrevista técnica': 'bg-status-technical',
+  'Prueba técnica': 'bg-status-test',
+  'Entrevista Final': 'bg-status-final',
+  'Oferta': 'bg-status-offer',
+  'Contratado': 'bg-status-hired',
+  'Rechazada': 'bg-status-rejected',
+  'Ghosting': 'bg-status-ghosted',
+};
+
 const statusStyles: Record<ApplicationStatus, string> = {
   'Guardada': 'bg-status-saved/10 text-status-saved border-status-saved/20',
   'Aplicada': 'bg-status-applied/10 text-status-applied border-status-applied/20',
