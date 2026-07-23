@@ -14,13 +14,13 @@ import { RecentLearningsWidget } from './RecentLearningsWidget';
 
 export function HomeView() {
   const { loadApplications, isLoading } = useJobStore();
-  const { config } = useUserStore();
+  const { profile } = useUserStore();
 
   useEffect(() => {
     loadApplications();
   }, [loadApplications]);
 
-  if (isLoading && !config.name) {
+  if (isLoading && !profile?.name) {
     return <div className="p-8 h-full flex items-center justify-center">Cargando tu espacio...</div>;
   }
 

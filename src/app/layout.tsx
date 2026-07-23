@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/layout/Sidebar";
-import { OnboardingModal } from "@/features/onboarding/components/OnboardingModal";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TopHeader } from "@/components/layout/TopHeader";
 
@@ -70,7 +69,6 @@ export default function RootLayout({
               {children}
             </main>
           </div>
-          <OnboardingModal />
         </ThemeProvider>
       </body>
     </html>

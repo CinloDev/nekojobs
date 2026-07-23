@@ -3,8 +3,16 @@
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import Image from 'next/image';
 import { MobileNav } from './MobileNav';
+import { useUserStore } from '@/store/useUserStore';
+import { useEffect } from 'react';
 
 export function TopHeader() {
+  const { profile, loadProfile } = useUserStore();
+
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
+
   return (
     <header className="flex items-center justify-between h-16 px-6 border-b bg-background w-full shrink-0 gap-4">
       {/* Left: Mobile Menu */}
@@ -19,11 +27,11 @@ export function TopHeader() {
 
       {/* Right: Actions */}
       <div className="flex items-center gap-4 shrink-0">
-        {/* Mocked User Profile for now */}
+        {/* User Profile */}
         <div className="flex items-center gap-3">
           <div className="flex flex-col items-end">
-            <span className="text-sm font-medium leading-none text-primary">Invitado</span>
-            <span className="text-xs text-muted-foreground mt-1">Desarrollador</span>
+            <span className="text-sm font-medium leading-none text-primary">{profile?.name || 'Invitado'}</span>
+            <span className="text-xs text-muted-foreground mt-1">{profile?.targetRole || 'Desarrollador'}</span>
           </div>
           <div className="h-9 w-9 rounded-full overflow-hidden bg-muted flex items-center justify-center border shrink-0">
             {/* Dummy Avatar Image. In the future, this will be dynamic */}
