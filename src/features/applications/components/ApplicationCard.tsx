@@ -22,7 +22,7 @@ export function ApplicationCard({ application, onEdit, onDelete }: ApplicationCa
   });
 
   return (
-    <Card className="group transition-all hover:shadow-md border-muted/50 hover:border-primary/20 bg-card/50 backdrop-blur-sm">
+    <Card className="group transition-all hover:shadow-md border-border-default hover:border-brand-primary/30 bg-surface">
       <CardContent className="p-5">
         <div className="flex items-start justify-between gap-4">
           <div className="space-y-1.5 flex-1 min-w-0">

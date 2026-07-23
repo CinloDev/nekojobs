@@ -59,6 +59,34 @@
   --radius-xl: var(--ds-radius-xl);
   --radius-pill: var(--ds-radius-pill);
 
+  /* Spacing */
+  --spacing-xs: var(--ds-spacing-xs);
+  --spacing-sm: var(--ds-spacing-sm);
+  --spacing-md: var(--ds-spacing-md);
+  --spacing-lg: var(--ds-spacing-lg);
+  --spacing-xl: var(--ds-spacing-xl);
+  --spacing-2xl: var(--ds-spacing-2xl);
+  --spacing-3xl: var(--ds-spacing-3xl);
+
+  /* Typography Sizes */
+  --text-display: var(--ds-text-display);
+  --text-heading-xl: var(--ds-text-heading-xl);
+  --text-heading-lg: var(--ds-text-heading-lg);
+  --text-heading-md: var(--ds-text-heading-md);
+  --text-heading-sm: var(--ds-text-heading-sm);
+  --text-body-lg: var(--ds-text-body-lg);
+  --text-body-md: var(--ds-text-body-md);
+  --text-body-sm: var(--ds-text-body-sm);
+  --text-caption: var(--ds-text-caption);
+  --text-mono: var(--ds-text-mono);
+
+  /* Shadows */
+  --shadow-xs: var(--ds-shadow-xs);
+  --shadow-sm: var(--ds-shadow-sm);
+  --shadow-md: var(--ds-shadow-md);
+  --shadow-lg: var(--ds-shadow-lg);
+  --shadow-xl: var(--ds-shadow-xl);
+
   /* Typography overrides */
   --font-sans: var(--ds-font-sans);
   --font-mono: var(--ds-font-mono);
@@ -170,7 +198,8 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground antialiased;
+    text-rendering: optimizeLegibility;
   }
   html {
     @apply font-sans;

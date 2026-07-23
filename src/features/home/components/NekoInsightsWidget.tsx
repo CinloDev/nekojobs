@@ -43,7 +43,7 @@ export function NekoInsightsWidget() {
   }, [applications]);
 
   return (
-    <WidgetCard className="bg-brand-soft/30 border-brand-focus/20 shadow-none" contentClassName="flex gap-md items-start pt-lg">
+    <WidgetCard className="bg-brand-soft border-0 shadow-none" contentClassName="flex gap-md items-start pt-lg">
       <div className="bg-brand-primary/10 p-sm rounded-lg flex-shrink-0">
         <Image src="/nekojobs.svg" alt="Neko" width={32} height={32} className="opacity-90" />
       </div>
