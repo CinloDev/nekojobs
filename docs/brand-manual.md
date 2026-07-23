@@ -64,9 +64,9 @@ The NekoJobs logo is the primary identifier of the brand.
 *Note: The following HEX values represent the base (Light Mode) intention. Dark mode will adapt these tokens to maintain the same contrast and semantic meaning.*
 
 ### Brand Colors
-- **Primary:** `#7C3AED` *(Premium Violet - Instantly recognizable as NekoJobs)*
-- **Primary Hover:** `#6D28D9`
-- **Primary Active:** `#5B21B6`
+- **Primary:** `#6D28D9` *(Violet 700 - Premium Violet, instantly recognizable as NekoJobs, optimized for contrast)*
+- **Primary Hover:** `#5B21B6`
+- **Primary Active:** `#4C1D95`
 - **Primary Soft:** `#F3E8FF` *(Used for subtle active states or tinted backgrounds)*
 - **Secondary:** `#18181B` *(Almost black, used for high-contrast secondary elements)*
 - **Accent:** `#38BDF8` *(Sky blue, used sparingly for charts, highlights, special badges, and onboarding)*
@@ -81,7 +81,7 @@ The NekoJobs logo is the primary identifier of the brand.
 ### Text
 - **Text Primary:** `#09090B` *(Deep near-black for headings and main body)*
 - **Text Secondary:** `#52525B` *(Subtle gray for descriptions and metadata)*
-- **Text Muted:** `#A1A1AA` *(For placeholders or disabled text)*
+- **Text Muted:** `#71717A` *(Zinc 500 - For placeholders or disabled text, ensuring readability)*
 - **Text Inverse:** `#FFFFFF` *(Text on primary buttons)*
 
 ### Borders
