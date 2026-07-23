@@ -8,7 +8,7 @@ import Image from 'next/image';
 
 export function OnboardingModal() {
   const [open, setOpen] = useState(false);
-  
+
   useEffect(() => {
     // Basic check to see if we should show onboarding
     const hasSeenOnboarding = localStorage.getItem('nekojobs_onboarding');
@@ -27,7 +27,7 @@ export function OnboardingModal() {
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2">
-            <Image src="/neko_logo.svg" alt="NekoJobs" width={24} height={24} />
+            <Image src="/nekojobs.svg" alt="NekoJobs" width={24} height={24} />
             Bienvenido a NekoJobs
           </DialogTitle>
           <DialogDescription>
