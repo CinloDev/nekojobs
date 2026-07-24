@@ -10,6 +10,8 @@ import { UserProfile } from '@/types';
 import { UserCircle, Target, Briefcase, MapPin, Code2, Save, Check, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { DataManagementSection } from '@/features/data-management/components/DataManagementSection';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 const levels = ['Trainee', 'Junior', 'Junior+', 'Semi Senior', 'Senior', 'Lead'];
 
@@ -89,10 +91,10 @@ export function SettingsView() {
 
   return (
     <div className="max-w-[800px] mx-auto py-8 px-4 w-full">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold tracking-tight mb-2">Configuración</h1>
-        <p className="text-muted-foreground">Administra tu perfil y preferencias personales.</p>
-      </div>
+      <PageHeader 
+        title="Configuración" 
+        description="Administra tu perfil y preferencias personales."
+      />
 
       <div className="bg-card border rounded-xl p-6 shadow-sm">
         <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
@@ -241,6 +243,10 @@ export function SettingsView() {
             </Button>
           </div>
         </form>
+      </div>
+
+      <div className="mt-8">
+        <DataManagementSection />
       </div>
     </div>
   );

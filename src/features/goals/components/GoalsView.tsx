@@ -19,10 +19,12 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from 'sonner';
 
+import { PageHeader } from '@/components/ui/PageHeader';
+
 export function GoalsView() {
   const { goals, loadGoals, deleteGoal } = useGoalStore();
   const { loadApplications } = useJobStore();
-  
+
   const [isFormOpen, setIsFormOpen] = useState(false);
   const [goalToEdit, setGoalToEdit] = useState<Goal | null>(null);
   const [goalToDelete, setGoalToDelete] = useState<string | null>(null);
@@ -61,32 +63,31 @@ export function GoalsView() {
 
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
-      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-        <div>
-          <h2 className="text-2xl font-bold tracking-tight">Metas Activas</h2>
-          <p className="text-muted-foreground text-sm mt-1">Sigue el progreso de tus objetivos.</p>
-        </div>
-        <Button onClick={handleCreate} className="flex-shrink-0">
+      <PageHeader
+        title="Metas Activas"
+        description="Sigue el progreso de tus objetivos."
+      >
+        <Button onClick={handleCreate}>
           <PlusCircle className="w-4 h-4 mr-2" />
           Nueva Meta
         </Button>
-      </div>
+      </PageHeader>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {goals.map(goal => (
-          <GoalCard 
-            key={goal.id} 
-            goal={goal} 
-            onEdit={handleEdit} 
-            onDelete={setGoalToDelete} 
+          <GoalCard
+            key={goal.id}
+            goal={goal}
+            onEdit={handleEdit}
+            onDelete={setGoalToDelete}
           />
         ))}
       </div>
 
-      <GoalFormModal 
-        open={isFormOpen} 
-        onOpenChange={setIsFormOpen} 
-        goalToEdit={goalToEdit} 
+      <GoalFormModal
+        open={isFormOpen}
+        onOpenChange={setIsFormOpen}
+        goalToEdit={goalToEdit}
       />
 
       <Dialog open={!!goalToDelete} onOpenChange={(open) => !open && setGoalToDelete(null)}>

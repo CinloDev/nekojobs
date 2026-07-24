@@ -10,6 +10,7 @@ import { SourcesBreakdown } from './SourcesBreakdown';
 import { TimelineStats } from './TimelineStats';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { useRouter } from 'next/navigation';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 export function AnalyticsView() {
   const { loadApplications } = useJobStore();
@@ -22,18 +23,24 @@ export function AnalyticsView() {
 
   if (!hasData) {
     return (
-      <div className="max-w-4xl mx-auto space-y-4">
-        <EmptyState onAction={() => router.push('/')} />
+      <div className="max-w-6xl mx-auto space-y-6">
+        <PageHeader
+          title="Estadísticas"
+          description="Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo."
+        />
+        <div className="max-w-4xl mx-auto mt-8">
+          <EmptyState onAction={() => router.push('/applications')} />
+        </div>
       </div>
     );
   }
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold tracking-tight">Estadísticas</h2>
-        <p className="text-muted-foreground text-sm mt-1">Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo.</p>
-      </div>
+      <PageHeader
+        title="Estadísticas"
+        description="Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo."
+      />
 
       {/* Row 1: KPIs Totales (Ocupa todo el ancho) */}
       <OverviewMetrics overview={overview} />
