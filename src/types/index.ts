@@ -75,23 +75,28 @@ export interface Interview {
   status: 'Scheduled' | 'Completed' | 'Cancelled';
 }
 
+export type LearningCategory = 'Technical' | 'Interview' | 'CV' | 'Soft Skills' | 'Process' | 'Other';
+
 export interface Learning {
   id: string;
   title: string;
   description: string;
-  category: 'Technical' | 'Soft Skill' | 'Process' | 'Other';
+  category: LearningCategory;
   relatedApplicationId?: string;
   tags: string[];
   createdAt: string;
 }
 
+export type GoalType = 'Applications' | 'Interviews' | 'Learnings';
+export type GoalPeriod = 'Weekly' | 'Monthly';
+
 export interface Goal {
   id: string;
   title: string;
-  type: 'Applications' | 'Interviews' | 'Learnings';
+  type: GoalType;
   targetValue: number;
   currentValue: number;
-  period: 'Weekly' | 'Monthly';
+  period: GoalPeriod;
   startDate: string;
   endDate: string;
   status: 'Active' | 'Completed' | 'Failed';
