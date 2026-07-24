@@ -40,4 +40,10 @@ export class LocalGoalRepository implements GoalRepository {
     const filtered = goals.filter(g => g.id !== id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
   }
+
+  async saveAll(goals: Goal[]): Promise<void> {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(goals));
+    }
+  }
 }

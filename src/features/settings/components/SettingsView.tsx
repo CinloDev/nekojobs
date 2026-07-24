@@ -10,6 +10,7 @@ import { UserProfile } from '@/types';
 import { UserCircle, Target, Briefcase, MapPin, Code2, Save, Check, Loader2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
+import { DataManagementSection } from '@/features/data-management/components/DataManagementSection';
 
 const levels = ['Trainee', 'Junior', 'Junior+', 'Semi Senior', 'Senior', 'Lead'];
 
@@ -241,6 +242,10 @@ export function SettingsView() {
             </Button>
           </div>
         </form>
+      </div>
+
+      <div className="mt-8">
+        <DataManagementSection />
       </div>
     </div>
   );
