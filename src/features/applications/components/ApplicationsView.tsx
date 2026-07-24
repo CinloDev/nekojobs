@@ -9,16 +9,15 @@ import { Application, ApplicationStatus } from '@/types';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, SearchX } from 'lucide-react';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { toast } from 'sonner';
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from "@/components/ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter,
+} from '@/components/ui/dialog';
 
 export function ApplicationsView() {
   const { applications, loadApplications, deleteApplication } = useJobStore();
@@ -57,6 +56,7 @@ export function ApplicationsView() {
     if (appToDelete) {
       deleteApplication(appToDelete);
       setAppToDelete(null);
+      toast.success('Postulación eliminada');
     }
   };
 
@@ -112,22 +112,24 @@ export function ApplicationsView() {
         applicationToEdit={appToEdit} 
       />
 
-      <AlertDialog open={!!appToDelete} onOpenChange={(open) => !open && setAppToDelete(null)}>
-        <AlertDialogContent>
-          <AlertDialogHeader>
-            <AlertDialogTitle>¿Estás seguro?</AlertDialogTitle>
-            <AlertDialogDescription>
+      <Dialog open={!!appToDelete} onOpenChange={(open) => !open && setAppToDelete(null)}>
+        <DialogContent className="sm:max-w-[425px]">
+          <DialogHeader>
+            <DialogTitle className="text-xl">¿Estás seguro?</DialogTitle>
+            <DialogDescription className="pt-2">
               Esta acción no se puede deshacer. Esto eliminará permanentemente la postulación de tu lista.
-            </AlertDialogDescription>
-          </AlertDialogHeader>
-          <AlertDialogFooter>
-            <AlertDialogCancel>Cancelar</AlertDialogCancel>
-            <AlertDialogAction onClick={confirmDelete} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="mt-6 flex flex-col sm:flex-row sm:justify-end gap-3">
+            <Button variant="outline" onClick={() => setAppToDelete(null)} className="w-full sm:w-auto">
+              Cancelar
+            </Button>
+            <Button variant="destructive" onClick={confirmDelete} className="w-full sm:w-auto">
               Eliminar
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

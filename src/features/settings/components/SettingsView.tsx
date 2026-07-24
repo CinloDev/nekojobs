@@ -15,14 +15,26 @@ const levels = ['Trainee', 'Junior', 'Junior+', 'Semi Senior', 'Senior', 'Lead']
 
 export function SettingsView() {
   const { profile, updateProfile, isLoading } = useUserStore();
-  const [formData, setFormData] = useState<Partial<UserProfile>>({});
-  const [stackInput, setStackInput] = useState('');
+  const [formData, setFormData] = useState<Partial<UserProfile>>({
+    name: profile?.name || '',
+    targetRole: profile?.targetRole || '',
+    level: profile?.level || '',
+    location: profile?.location || '',
+    weeklyGoal: profile?.weeklyGoal || 1,
+  });
+  const [stackInput, setStackInput] = useState(profile?.mainStack?.join(', ') || '');
   const [isSaving, setIsSaving] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (profile) {
-      setFormData(profile);
+      setFormData({
+        name: profile.name || '',
+        targetRole: profile.targetRole || '',
+        level: profile.level || '',
+        location: profile.location || '',
+        weeklyGoal: profile.weeklyGoal || 1,
+      });
       setStackInput(profile.mainStack?.join(', ') || '');
     }
   }, [profile]);
