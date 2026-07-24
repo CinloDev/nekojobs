@@ -40,4 +40,10 @@ export class LocalLearningRepository implements LearningRepository {
     const filtered = learnings.filter(l => l.id !== id);
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filtered));
   }
+
+  async saveAll(learnings: Learning[]): Promise<void> {
+    if (typeof window !== 'undefined') {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(learnings));
+    }
+  }
 }
