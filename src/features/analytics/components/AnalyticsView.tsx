@@ -10,6 +10,7 @@ import { SourcesBreakdown } from './SourcesBreakdown';
 import { TimelineStats } from './TimelineStats';
 import { EmptyState } from '@/components/ui/EmptyState';
 import { useRouter } from 'next/navigation';
+import { PageHeader } from '@/components/ui/PageHeader';
 
 export function AnalyticsView() {
   const { loadApplications } = useJobStore();
@@ -30,10 +31,10 @@ export function AnalyticsView() {
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
-      <div className="mb-6">
-        <h2 className="text-2xl font-bold tracking-tight">Estadísticas</h2>
-        <p className="text-muted-foreground text-sm mt-1">Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo.</p>
-      </div>
+      <PageHeader
+        title="Estadísticas"
+        description="Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo."
+      />
 
       {/* Row 1: KPIs Totales (Ocupa todo el ancho) */}
       <OverviewMetrics overview={overview} />
