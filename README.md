@@ -1,4 +1,6 @@
 # NekoJobs 🐱💼
+![Version](https://img.shields.io/badge/version-v1.0.0--beta-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
 
 > **El sistema operativo para tu búsqueda laboral.**
 
