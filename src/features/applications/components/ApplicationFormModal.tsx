@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Application, ApplicationStatus, ApplicationSource, Modality } from '@/types';
 import { useJobStore } from '../store/useJobStore';
+import { toast } from 'sonner';
 import { 
   Building2, 
   Briefcase, 
@@ -19,7 +20,8 @@ import {
   DollarSign, 
   Code2, 
   FileText,
-  Sparkles
+  Sparkles,
+  Loader2
 } from 'lucide-react';
 
 interface ApplicationFormModalProps {
@@ -55,6 +57,7 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
   const { addApplication, updateApplication } = useJobStore();
   const [formData, setFormData] = useState<Partial<Application>>(defaultState);
   const [techInput, setTechInput] = useState('');
+  const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -66,11 +69,40 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
         setFormData(defaultState);
         setTechInput('');
       }
+      setIsSaving(false);
     }
   }, [open, applicationToEdit]);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // 1. Validar campos requeridos sin espacios
+    const finalCompany = formData.company?.trim() || '';
+    const finalPosition = formData.position?.trim() || '';
+    
+    if (!finalCompany || !finalPosition) {
+      toast.error('La empresa y la posición son obligatorias.');
+      return;
+    }
+
+    // 2. Validar URL (autocompletar http/https y verificar validez)
+    let finalUrl = formData.url?.trim() || '';
+    if (finalUrl) {
+      if (!/^https?:\/\//i.test(finalUrl)) {
+        finalUrl = `https://${finalUrl}`;
+      }
+      try {
+        new URL(finalUrl); // Lanza error si no es válida
+      } catch (e) {
+        toast.error('La URL ingresada no parece ser válida. Por favor, revísala.');
+        return;
+      }
+    }
+
+    setIsSaving(true);
+    
+    // Simular un poco de latencia para mejorar el UX de feedback (opcional)
+    await new Promise(resolve => setTimeout(resolve, 300));
     
     const technologies = techInput
       .split(',')
@@ -83,19 +115,28 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
       updateApplication({
         ...applicationToEdit,
         ...formData,
+        company: finalCompany,
+        position: finalPosition,
+        url: finalUrl,
         technologies,
         updatedAt: now,
       } as Application);
+      toast.success('Postulación actualizada correctamente');
     } else {
       addApplication({
         id: crypto.randomUUID(),
         ...formData,
+        company: finalCompany,
+        position: finalPosition,
+        url: finalUrl,
         technologies,
         appliedAt: now,
         updatedAt: now,
       } as Application);
+      toast.success('Nueva postulación agregada con éxito');
     }
     
+    setIsSaving(false);
     onOpenChange(false);
   };
 
@@ -105,7 +146,7 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-[550px]">
+      <DialogContent className="sm:max-w-[550px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <div className="flex items-center gap-3">
             <div className="p-2 bg-primary/10 rounded-xl text-primary ring-1 ring-primary/20">
@@ -124,7 +165,7 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
         
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">
           {/* Section 1: Basic Info */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label htmlFor="company" className="flex items-center gap-2 text-muted-foreground font-medium">
                 <Building2 className="w-4 h-4 text-primary/70" />
@@ -154,7 +195,7 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
           </div>
 
           {/* Section 2: Status & Source */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label className="flex items-center gap-2 text-muted-foreground font-medium">
                 <Activity className="w-4 h-4 text-primary/70" />
@@ -193,15 +234,15 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
             </Label>
             <Input 
               id="url" 
-              type="url" 
-              placeholder="https://linkedin.com/jobs/..."
+              type="text" 
+              placeholder="Ej: www.linkedin.com/jobs/..."
               value={formData.url} 
               onChange={(e) => updateField('url', e.target.value)} 
             />
           </div>
 
           {/* Section 4: Details */}
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="space-y-1.5">
               <Label className="flex items-center gap-2 text-muted-foreground font-medium">
                 <MapPin className="w-4 h-4 text-primary/70" />
@@ -260,11 +301,18 @@ export function ApplicationFormModal({ open, onOpenChange, applicationToEdit }: 
           </div>
 
           <DialogFooter className="mt-4">
-            <Button type="button" variant="outline" onClick={() => onOpenChange(false)}>
+            <Button type="button" variant="outline" onClick={() => onOpenChange(false)} disabled={isSaving}>
               Cancelar
             </Button>
-            <Button type="submit">
-              {applicationToEdit ? 'Guardar Cambios' : 'Crear Postulación'}
+            <Button type="submit" disabled={isSaving} className="min-w-[150px]">
+              {isSaving ? (
+                <>
+                  <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                  Guardando...
+                </>
+              ) : (
+                applicationToEdit ? 'Guardar Cambios' : 'Crear Postulación'
+              )}
             </Button>
           </DialogFooter>
         </form>

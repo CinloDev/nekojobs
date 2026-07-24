@@ -4,6 +4,7 @@ import "./globals.css";
 import { Sidebar } from "@/components/layout/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TopHeader } from "@/components/layout/TopHeader";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -69,6 +70,7 @@ export default function RootLayout({
               {children}
             </main>
           </div>
+          <Toaster position="bottom-right" theme="system" richColors closeButton />
         </ThemeProvider>
       </body>
     </html>
