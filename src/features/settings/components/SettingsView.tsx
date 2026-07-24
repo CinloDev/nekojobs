@@ -1,13 +1,15 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useUserStore } from '@/store/useUserStore';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { UserProfile } from '@/types';
-import { UserCircle, Target, Briefcase, MapPin, Code2, Save } from 'lucide-react';
+import { UserCircle, Target, Briefcase, MapPin, Code2, Save, Check, Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const levels = ['Trainee', 'Junior', 'Junior+', 'Semi Senior', 'Senior', 'Lead'];
 
@@ -16,6 +18,7 @@ export function SettingsView() {
   const [formData, setFormData] = useState<Partial<UserProfile>>({});
   const [stackInput, setStackInput] = useState('');
   const [isSaving, setIsSaving] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   useEffect(() => {
     if (profile) {
@@ -24,8 +27,25 @@ export function SettingsView() {
     }
   }, [profile]);
 
+  const isDirty = useMemo(() => {
+    if (!profile) return false;
+    
+    // Check if simple fields are different
+    const fields: (keyof UserProfile)[] = ['name', 'targetRole', 'level', 'location', 'weeklyGoal'];
+    const hasSimpleChanges = fields.some(field => formData[field] !== profile[field]);
+    
+    // Check if mainStack is different
+    const currentStack = stackInput.split(',').map(t => t.trim()).filter(t => t.length > 0).join(',');
+    const profileStack = profile.mainStack?.join(',') || '';
+    const hasStackChanges = currentStack !== profileStack;
+    
+    return hasSimpleChanges || hasStackChanges;
+  }, [formData, stackInput, profile]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isDirty) return;
+    
     setIsSaving(true);
     
     const mainStack = stackInput
@@ -39,6 +59,12 @@ export function SettingsView() {
     });
     
     setIsSaving(false);
+    setIsSuccess(true);
+    
+    // Reset success state after 2.5 seconds
+    setTimeout(() => {
+      setIsSuccess(false);
+    }, 2500);
   };
 
   const updateField = <K extends keyof UserProfile>(field: K, value: UserProfile[K]) => {
@@ -50,7 +76,7 @@ export function SettingsView() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto py-8 px-4">
+    <div className="max-w-[800px] mx-auto py-8 px-4 w-full">
       <div className="mb-8">
         <h1 className="text-3xl font-bold tracking-tight mb-2">Configuración</h1>
         <p className="text-muted-foreground">Administra tu perfil y preferencias personales.</p>
@@ -148,9 +174,58 @@ export function SettingsView() {
           </div>
 
           <div className="flex justify-end pt-4 border-t mt-4">
-            <Button type="submit" disabled={isSaving} className="gap-2">
-              <Save className="w-4 h-4" />
-              {isSaving ? 'Guardando...' : 'Guardar Cambios'}
+            <Button 
+              type="submit" 
+              disabled={!isDirty || isSaving || isSuccess} 
+              className={cn(
+                "min-w-[160px] transition-all duration-300 overflow-hidden relative",
+                isSuccess && "bg-emerald-600 text-white hover:bg-emerald-700 !opacity-100 disabled:opacity-100"
+              )}
+            >
+              <AnimatePresence mode="wait">
+                {isSaving ? (
+                  <motion.div
+                    key="saving"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2 absolute"
+                  >
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                    <span>Guardando...</span>
+                  </motion.div>
+                ) : isSuccess ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2 absolute"
+                  >
+                    <Check className="w-4 h-4" />
+                    <span>¡Guardado!</span>
+                  </motion.div>
+                ) : (
+                  <motion.div
+                    key="idle"
+                    initial={{ opacity: 0, y: 15 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -15 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center gap-2 absolute"
+                  >
+                    <Save className="w-4 h-4" />
+                    <span>Guardar Cambios</span>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              {/* Invisible placeholder to maintain button width correctly */}
+              <div className="flex items-center gap-2 opacity-0 pointer-events-none">
+                <Save className="w-4 h-4" />
+                <span>Guardar Cambios</span>
+              </div>
             </Button>
           </div>
         </form>
