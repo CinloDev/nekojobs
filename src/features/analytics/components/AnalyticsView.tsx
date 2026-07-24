@@ -23,8 +23,14 @@ export function AnalyticsView() {
 
   if (!hasData) {
     return (
-      <div className="max-w-4xl mx-auto space-y-4">
-        <EmptyState onAction={() => router.push('/')} />
+      <div className="max-w-6xl mx-auto space-y-6">
+        <PageHeader
+          title="Estadísticas"
+          description="Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo."
+        />
+        <div className="max-w-4xl mx-auto mt-8">
+          <EmptyState onAction={() => router.push('/applications')} />
+        </div>
       </div>
     );
   }

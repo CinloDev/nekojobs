@@ -5,6 +5,7 @@ import { Sidebar } from "@/components/layout/Sidebar";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { TopHeader } from "@/components/layout/TopHeader";
 import { Toaster } from "sonner";
+import { OnboardingModal } from "@/features/onboarding/components/OnboardingModal";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,35 +18,18 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   title: "NekoJobs - Gestor de Búsqueda Laboral",
-  description: "Transforma tu búsqueda de empleo en un proceso estructurado.",
-  icons: {
-    icon: [
-      { url: "/nekojobs.svg", type: "image/svg+xml" },
-    ],
-    apple: [
-      { url: "/icons/icon-192.png" }
-    ]
-  },
+  description: "Transforma tu búsqueda de empleo en un proceso estructurado, privado y local-first.",
   openGraph: {
-    title: "NekoJobs - Gestor de Búsqueda Laboral",
+    title: "NekoJobs",
     description: "Transforma tu búsqueda de empleo en un proceso estructurado.",
     siteName: "NekoJobs",
-    images: [
-      {
-        url: "/og/nekojobs-og.png",
-        width: 1200,
-        height: 630,
-        alt: "NekoJobs Preview",
-      }
-    ],
     locale: "es_ES",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "NekoJobs - Gestor de Búsqueda Laboral",
+    title: "NekoJobs",
     description: "Transforma tu búsqueda de empleo en un proceso estructurado.",
-    images: ["/og/nekojobs-og.png"],
   },
 };
 
@@ -71,6 +55,7 @@ export default function RootLayout({
             </main>
           </div>
           <Toaster position="bottom-right" theme="system" richColors closeButton />
+          <OnboardingModal />
         </ThemeProvider>
       </body>
     </html>

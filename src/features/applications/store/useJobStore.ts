@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 import { Application } from '@/types';
 import { LocalApplicationRepository } from '../services/localApplicationRepository';
-import { mockApplications } from '@/lib/mock-data';
 
 interface JobState {
   applications: Application[];
@@ -11,7 +10,6 @@ interface JobState {
   addApplication: (app: Application) => Promise<void>;
   updateApplication: (app: Application) => Promise<void>;
   deleteApplication: (id: string) => Promise<void>;
-  loadDemoData: () => Promise<void>;
 }
 
 const repository = new LocalApplicationRepository();
@@ -61,14 +59,4 @@ export const useJobStore = create<JobState>((set) => ({
       set({ error: 'Error deleting application' });
     }
   },
-
-  loadDemoData: async () => {
-    set({ isLoading: true, error: null });
-    try {
-      await repository.saveAll(mockApplications);
-      set({ applications: mockApplications, isLoading: false });
-    } catch {
-      set({ error: 'Error loading demo data', isLoading: false });
-    }
-  }
 }));
