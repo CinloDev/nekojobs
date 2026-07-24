@@ -1,231 +1,76 @@
-# NekoJobs
-
-<p align="center">
-  <img src="./public/neko_logo.svg" alt="NekoJobs logo" width="120"/>
-</p>
-
-<h3 align="center">
-  Turn your job search into a data-driven process.
-</h3>
-
-<p align="center">
-  A modern open-source platform to track job applications, interviews and professional growth.
-</p>
-
-<p align="center">
-  <a href="https://nekojobs.cinlodev.com">
-    🌐 Live Demo
-  </a>
-  •
-  <a href="docs/FEATURES.md">
-    ✨ Features
-  </a>
-  •
-  <a href="docs/ROADMAP.md">
-    🚀 Roadmap
-  </a>
-</p>
-
----
-
-## 📌 About NekoJobs
-
-Searching for a job as a developer can quickly become chaotic.
-
-Applications get lost, interviews are forgotten, technical tests are scattered across different platforms, and it becomes difficult to understand what is actually working.
-
-**NekoJobs was created to solve this problem.**
-
-It transforms a traditional job search into a structured process where developers can:
-
-- Track applications.
-- Manage interview stages.
-- Analyze progress.
-- Identify improvement opportunities.
-- Make decisions based on real data.
-
-> Your job search is a process. NekoJobs helps you measure and improve it.
-
----
-
-# 🏗️ Architecture
-
-NekoJobs follows a modular architecture designed for scalability.
-
-```
-src/
-│
-├── app/
-│   ├── dashboard/
-│   ├── applications/
-│   ├── analytics/
-│   └── settings/
-│
-├── components/
-│
-├── features/
-│   ├── applications/
-│   ├── dashboard/
-│   ├── analytics/
-│   ├── goals/
-│   └── learnings/
-│
-├── lib/
-│
-├── store/
-│
-└── types/
-```
+# NekoJobs 🐱💼
 
----
+> **El sistema operativo para tu búsqueda laboral.**
 
-# 🛠️ Tech Stack
+NekoJobs es una aplicación web (SaaS personal) diseñada para que los desarrolladores y profesionales puedan organizar, analizar y hacer seguimiento de sus procesos de selección, sin depender de hojas de cálculo desordenadas.
 
-## Frontend
+![NekoJobs Preview](./public/nekojobs.svg)
 
-| Technology | Purpose |
-|-|-|
-| Next.js | React framework |
-| TypeScript | Type safety |
-| Tailwind CSS | Styling |
-| shadcn/ui | UI components |
-| Zustand | State management |
-| Framer Motion | Animations |
-| Lucide React | Icons |
+## ✨ Características Principales
 
----
+*   **Pipeline Visual (Kanban-style):** Sigue el estado de tus postulaciones desde que las guardas hasta la oferta final o el rechazo.
+*   **Analíticas en Tiempo Real:** Descubre tu tasa de respuesta, efectividad por canal (LinkedIn, Referidos, Web) y métricas de desempeño.
+*   **Gestión de Metas:** Define objetivos (ej. "Enviar 10 postulaciones por semana") y observa tu progreso automático.
+*   **Diario de Aprendizaje:** Anota las preguntas técnicas que fallaste o el feedback que recibiste en entrevistas para no cometer el mismo error dos veces.
+*   **Modo Demo:** Prueba toda la aplicación con un click cargando datos simulados realistas ("Portfolio Ready").
 
-## Data Layer
+## 🔒 Arquitectura Local-first
 
-Current:
+NekoJobs está construido bajo la filosofía **Local-first**. Esto significa que:
 
-```
-UI
- ↓
-Zustand Store
- ↓
-Repository Pattern
- ↓
-LocalStorage
-```
+1.  **Tus datos son tuyos:** Toda la información que ingresas (postulaciones, salarios, notas) se guarda **exclusivamente en tu navegador** (`LocalStorage`).
+2.  **Sin servidores ni cuentas:** No hay un backend husmeando en tus procesos, ni necesitas crear un usuario con contraseña.
+3.  **Backups Seguros:** Puedes exportar toda tu base de datos en formato `.json` con un solo click e importarla en otro dispositivo si cambias de PC.
+4.  **Cero Latencia:** Al no depender de la red, la interfaz responde instantáneamente.
 
-Future:
+*En el futuro, ofreceremos sincronización opcional a la nube para quienes deseen respaldar su información entre dispositivos, pero la filosofía local-first siempre será el modo por defecto.*
 
-```
-UI
- ↓
-Zustand Store
- ↓
-Repository Pattern
- ↓
-Supabase
- ↓
-PostgreSQL
-```
+## 🛠️ Stack Tecnológico
 
-The repository abstraction allows migrating storage without rewriting the application.
+NekoJobs fue creado con las herramientas más modernas del ecosistema Frontend:
 
----
+*   **Framework:** Next.js (App Router)
+*   **Lenguaje:** TypeScript (Strict Mode)
+*   **Estilos:** Tailwind CSS + shadcn/ui
+*   **Manejo de Estado:** Zustand (con middleware persist para LocalStorage)
+*   **Iconos:** Lucide React
+*   **Componentes Animados:** Framer Motion
 
-# 🚀 Getting Started
+## 🚀 Instalación y Desarrollo Local
 
-## Requirements
+NekoJobs utiliza `pnpm` como gestor de paquetes exclusivo.
 
-- Node.js 20+
-- npm / pnpm
+1.  Clona el repositorio.
+2.  Instala las dependencias:
+    ```bash
+    pnpm install
+    ```
+3.  Inicia el servidor de desarrollo:
+    ```bash
+    pnpm dev
+    ```
+4.  Abre `http://localhost:3000` en tu navegador.
 
----
+## 📁 Estructura del Proyecto (Feature-Sliced)
 
-## Installation
+El proyecto utiliza un acercamiento de *Feature-Sliced Design* para máxima mantenibilidad:
 
-Clone the repository:
+*   `src/features/applications`: Gestión del Pipeline y CRM de postulaciones.
+*   `src/features/analytics`: Motor de cálculo derivado (`useMemo`) y visualizaciones.
+*   `src/features/goals`: Subsistema de metas.
+*   `src/features/learnings`: Diario de aprendizaje.
+*   `src/features/data-management`: Servicio centralizado para importación/exportación JSON.
+*   `src/features/onboarding`: Modal de bienvenida y gestor de primer uso.
+*   `src/features/settings`: Preferencias y perfil del usuario.
 
-```bash
-git clone https://github.com/CinloDev/nekojobs.git
-```
+## 📝 Roadmap
 
-Install dependencies:
-
-```bash
-pnpm install
-```
-
-Run development server:
-
-```bash
-pnpm dev
-```
-
-Open:
-
-```
-http://localhost:3000
-```
-
----
-
-# 🧪 Development
-
-Run checks:
-
-```bash
-pnpm lint
-```
-
-Build production version:
-
-```bash
-pnpm build
-```
-
----
-
-# 🤝 Contributing
-
-Contributions are welcome.
-
-If you want to improve NekoJobs:
-
-1. Fork the repository.
-2. Create a feature branch.
-
-```bash
-git checkout -b feature/my-feature
-```
-
-3. Commit your changes.
-
-```bash
-git commit -m "Add new feature"
-```
-
-4. Push your branch.
-
-```bash
-git push origin feature/my-feature
-```
-
-5. Open a Pull Request.
-
----
-
-# 📄 License
-
-This project is licensed under the MIT License.
-
----
-
-# 👩‍💻 Created by CinloDev
-
-Built with ❤️ by a developer who needed this tool herself.
-
-NekoJobs is part of the CinloDev ecosystem:
-
-- 🐱 NekoTools
-- 🦷 CinloLabs
-- 💰 AlDía
-- 🔐 Vault
-
----
-
-⭐ If NekoJobs helps your job search, consider giving the project a star.
+*   [x] MVP de Pipeline.
+*   [x] Autocorrección de URLs y validaciones.
+*   [x] Integración de Metas y Aprendizajes.
+*   [x] Panel de Estadísticas (Analytics).
+*   [x] Data Management (Import/Export JSON).
+*   [x] Onboarding interactivo.
+*   [ ] Modo Oscuro 100% pulido.
+*   [ ] Integración Opcional Cloud (BaaS) para Sync.
+*   [ ] Oportunidades Freelance (Soporte Multi-tipo).
