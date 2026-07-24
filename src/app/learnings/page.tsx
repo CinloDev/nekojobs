@@ -1,8 +1,14 @@
+import { LearningsView } from "@/features/learnings/components/LearningsView";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Aprendizajes - NekoJobs",
+};
+
 export default function LearningsPage() {
   return (
-    <div className="px-4 py-8 md:p-8 max-w-4xl mx-auto flex flex-col items-center justify-center h-full text-center mt-20">
-      <h1 className="text-3xl font-bold tracking-tight mb-4">Aprendizajes</h1>
-      <p className="text-muted-foreground">Esta sección está en desarrollo y estará disponible pronto.</p>
+    <div className="px-4 py-8 md:p-8 h-full">
+      <LearningsView />
     </div>
   );
 }

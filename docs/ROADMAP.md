@@ -32,3 +32,14 @@ AI-powered features:
 - [ ] Skill gap detection
 - [ ] Interview preparation assistant
 - [ ] Personalized career insights
+
+---
+
+## Future
+
+### Data Management
+
+- [ ] Export JSON backup
+- [ ] Import JSON backup
+- [ ] Data versioning
+- [ ] Optional cloud sync
