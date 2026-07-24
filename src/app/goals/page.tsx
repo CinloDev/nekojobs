@@ -1,8 +1,14 @@
+import { GoalsView } from "@/features/goals/components/GoalsView";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Metas - NekoJobs",
+};
+
 export default function GoalsPage() {
   return (
-    <div className="px-4 py-8 md:p-8 max-w-4xl mx-auto flex flex-col items-center justify-center h-full text-center mt-20">
-      <h1 className="text-3xl font-bold tracking-tight mb-4">Metas</h1>
-      <p className="text-muted-foreground">Esta sección está en desarrollo y estará disponible pronto.</p>
+    <div className="px-4 py-8 md:p-8 h-full">
+      <GoalsView />
     </div>
   );
 }
