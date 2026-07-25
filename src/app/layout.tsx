@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { TopHeader } from "@/components/layout/TopHeader";
 import { Toaster } from "sonner";
 import { OnboardingModal } from "@/features/onboarding/components/OnboardingModal";
+import { Footer } from "@/components/layout/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -44,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`${inter.className} antialiased h-screen flex overflow-hidden bg-muted/20`}>
+      <body className={`${inter.className} antialiased h-[100dvh] flex overflow-hidden bg-muted/20 w-full max-w-full`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"
@@ -52,10 +53,13 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Sidebar />
-          <div className="flex-1 flex flex-col h-screen overflow-hidden">
+          <div className="flex-1 flex flex-col h-[100dvh] overflow-hidden min-w-0 w-full">
             <TopHeader />
-            <main className="flex-1 overflow-y-auto">
-              {children}
+            <main className="flex-1 overflow-y-auto overflow-x-hidden flex flex-col justify-between min-w-0 w-full">
+              <div className="flex-1 pb-6 sm:pb-8 min-w-0">
+                {children}
+              </div>
+              <Footer />
             </main>
           </div>
           <Toaster position="bottom-right" theme="system" richColors closeButton />
