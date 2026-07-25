@@ -6,7 +6,7 @@
 
 NekoJobs es una aplicación web (SaaS personal) diseñada para que los desarrolladores y profesionales puedan organizar, analizar y hacer seguimiento de sus procesos de selección, sin depender de hojas de cálculo desordenadas.
 
-![NekoJobs Preview](./public/nekojobs.svg)
+<img src="./public/nekojobs.svg" alt="NekoJobs Preview" width="200" />
 
 ## ✨ Características Principales
 

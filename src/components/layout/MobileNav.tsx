@@ -41,7 +41,7 @@ export function MobileNav() {
             onClick={() => setOpen(false)}
             className="fixed inset-0 z-[100] bg-black/50 backdrop-blur-sm"
           />
-          
+
           {/* Sidebar Panel */}
           <motion.div
             initial={{ x: '-100%' }}
@@ -51,17 +51,16 @@ export function MobileNav() {
             className="fixed inset-y-0 left-0 z-[101] w-72 flex flex-col bg-sidebar border-r border-border shadow-xl h-[100dvh]"
           >
             <div className="flex h-16 items-center justify-between px-6 border-b border-border shrink-0">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 onClick={() => setOpen(false)}
-                className="text-xl font-bold text-primary flex items-center gap-2 transition-opacity hover:opacity-80"
+                className="flex items-center gap-2 transition-opacity hover:opacity-80"
               >
-                <Image src="/neko_logo.svg" alt="NekoJobs Logo" width={28} height={28} />
-                NekoJobs
+                <Image src="/icons/nekojobs.svg" alt="NekoJobs Logo" width={220} height={60} className="w-auto h-14 -ml-2" priority />
               </Link>
-              <Button 
-                variant="ghost" 
-                size="icon" 
+              <Button
+                variant="ghost"
+                size="icon"
                 onClick={() => setOpen(false)}
                 className="shrink-0 -mr-2"
               >
@@ -80,10 +79,10 @@ export function MobileNav() {
 
   return (
     <>
-      <Button 
-        variant="ghost" 
-        size="icon" 
-        className="lg:hidden shrink-0" 
+      <Button
+        variant="ghost"
+        size="icon"
+        className="lg:hidden shrink-0"
         onClick={() => setOpen(true)}
       >
         <Menu className="h-5 w-5" />

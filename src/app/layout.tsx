@@ -19,6 +19,10 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   title: "NekoJobs - Gestor de Búsqueda Laboral",
   description: "Transforma tu búsqueda de empleo en un proceso estructurado, privado y local-first.",
+  icons: {
+    icon: "/neko_logo.svg",
+    apple: "/icons/icon-192.png",
+  },
   openGraph: {
     title: "NekoJobs",
     description: "Transforma tu búsqueda de empleo en un proceso estructurado.",
