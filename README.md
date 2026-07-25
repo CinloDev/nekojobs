@@ -73,6 +73,7 @@ El proyecto utiliza un acercamiento de *Feature-Sliced Design* para máxima mant
 *   [x] Panel de Estadísticas (Analytics).
 *   [x] Data Management (Import/Export JSON).
 *   [x] Onboarding interactivo.
-*   [ ] Modo Oscuro 100% pulido.
+*   [x] Modo Oscuro 100% pulido.
+*   [x] Personalización de Perfil (Avatar y preferencias).
 *   [ ] Integración Opcional Cloud (BaaS) para Sync.
 *   [ ] Oportunidades Freelance (Soporte Multi-tipo).
