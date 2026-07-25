@@ -4,6 +4,7 @@ import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import Image from 'next/image';
 import { MobileNav } from './MobileNav';
 import { useUserStore } from '@/store/useUserStore';
+import { UserCircle } from 'lucide-react';
 import { useEffect } from 'react';
 
 export function TopHeader() {
@@ -33,15 +34,17 @@ export function TopHeader() {
             <span className="text-sm font-medium leading-none text-primary">{profile?.name || 'Invitado'}</span>
             <span className="text-xs text-muted-foreground mt-1">{profile?.targetRole || 'Desarrollador'}</span>
           </div>
-          <div className="h-9 w-9 rounded-full overflow-hidden bg-muted flex items-center justify-center border shrink-0">
-            {/* Dummy Avatar Image. In the future, this will be dynamic */}
-            <Image 
-              src="/nekojobs.svg" 
-              alt="Avatar" 
-              width={24} 
-              height={24} 
-              className="opacity-50"
-            />
+          <div className="relative h-9 w-9 rounded-full overflow-hidden bg-muted flex items-center justify-center border shrink-0">
+            {profile?.avatar ? (
+              <Image 
+                src={profile.avatar} 
+                alt="Avatar" 
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <UserCircle className="w-5 h-5 text-muted-foreground" />
+            )}
           </div>
         </div>
         

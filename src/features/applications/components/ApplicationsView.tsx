@@ -60,15 +60,6 @@ export function ApplicationsView() {
     }
   };
 
-  if (applications.length === 0) {
-    return (
-      <div className="space-y-4">
-        <EmptyState onAction={handleCreate} />
-        <ApplicationFormModal open={isFormOpen} onOpenChange={setIsFormOpen} applicationToEdit={appToEdit} />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
@@ -84,7 +75,9 @@ export function ApplicationsView() {
         </Button>
       </div>
 
-      {filteredApps.length > 0 ? (
+      {applications.length === 0 ? (
+        <EmptyState onAction={handleCreate} />
+      ) : filteredApps.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
           {filteredApps.map(app => (
             <ApplicationCard 

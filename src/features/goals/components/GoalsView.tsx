@@ -52,15 +52,6 @@ export function GoalsView() {
     }
   };
 
-  if (goals.length === 0) {
-    return (
-      <div className="space-y-4 max-w-4xl mx-auto">
-        <EmptyState onAction={handleCreate} />
-        <GoalFormModal open={isFormOpen} onOpenChange={setIsFormOpen} goalToEdit={goalToEdit} />
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       <PageHeader
@@ -73,16 +64,25 @@ export function GoalsView() {
         </Button>
       </PageHeader>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {goals.map(goal => (
-          <GoalCard
-            key={goal.id}
-            goal={goal}
-            onEdit={handleEdit}
-            onDelete={setGoalToDelete}
-          />
-        ))}
-      </div>
+      {goals.length === 0 ? (
+        <EmptyState 
+          title="Aún no hay metas activas"
+          description="Establecé objetivos para mantenerte motivado y organizado."
+          actionLabel="Nueva Meta"
+          onAction={handleCreate} 
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {goals.map(goal => (
+            <GoalCard
+              key={goal.id}
+              goal={goal}
+              onEdit={handleEdit}
+              onDelete={setGoalToDelete}
+            />
+          ))}
+        </div>
+      )}
 
       <GoalFormModal
         open={isFormOpen}

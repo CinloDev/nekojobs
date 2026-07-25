@@ -51,15 +51,6 @@ export function LearningsView() {
     }
   };
 
-  if (learnings.length === 0) {
-    return (
-      <div className="space-y-4 max-w-4xl mx-auto">
-        <EmptyState onAction={handleCreate} />
-        <LearningFormModal open={isFormOpen} onOpenChange={setIsFormOpen} learningToEdit={learningToEdit} />
-      </div>
-    );
-  }
-
   // Ordenar por fecha descendente
   const sortedLearnings = [...learnings].sort((a, b) =>
     new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
@@ -77,16 +68,25 @@ export function LearningsView() {
         </Button>
       </PageHeader>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {sortedLearnings.map(learning => (
-          <LearningCard
-            key={learning.id}
-            learning={learning}
-            onEdit={handleEdit}
-            onDelete={setLearningToDelete}
-          />
-        ))}
-      </div>
+      {learnings.length === 0 ? (
+        <EmptyState 
+          title="Aún no hay aprendizajes registrados"
+          description="Anota tus lecciones de cada entrevista o prueba técnica."
+          actionLabel="Registrar Aprendizaje"
+          onAction={handleCreate} 
+        />
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {sortedLearnings.map(learning => (
+            <LearningCard
+              key={learning.id}
+              learning={learning}
+              onEdit={handleEdit}
+              onDelete={setLearningToDelete}
+            />
+          ))}
+        </div>
+      )}
 
       <LearningFormModal
         open={isFormOpen}

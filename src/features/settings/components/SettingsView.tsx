@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, useRef } from 'react';
+import Image from 'next/image';
 import { useUserStore } from '@/store/useUserStore';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -23,6 +24,7 @@ export function SettingsView() {
     level: profile?.level || '',
     location: profile?.location || '',
     weeklyGoal: profile?.weeklyGoal || 1,
+    avatar: profile?.avatar || '',
   });
   const [stackInput, setStackInput] = useState(profile?.mainStack?.join(', ') || '');
   const [isSaving, setIsSaving] = useState(false);
@@ -36,6 +38,7 @@ export function SettingsView() {
         level: profile.level || '',
         location: profile.location || '',
         weeklyGoal: profile.weeklyGoal || 1,
+        avatar: profile.avatar || '',
       });
       setStackInput(profile.mainStack?.join(', ') || '');
     }
@@ -45,7 +48,7 @@ export function SettingsView() {
     if (!profile) return false;
     
     // Check if simple fields are different
-    const fields: (keyof UserProfile)[] = ['name', 'targetRole', 'level', 'location', 'weeklyGoal'];
+    const fields: (keyof UserProfile)[] = ['name', 'targetRole', 'level', 'location', 'weeklyGoal', 'avatar'];
     const hasSimpleChanges = fields.some(field => formData[field] !== profile[field]);
     
     // Check if mainStack is different
@@ -85,6 +88,19 @@ export function SettingsView() {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleAvatarChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        updateField('avatar', reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   if (isLoading && !profile) {
     return <div className="p-8 flex items-center justify-center">Cargando perfil...</div>;
   }
@@ -103,6 +119,49 @@ export function SettingsView() {
         </h2>
         
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
+          {/* Avatar Section */}
+          <div className="flex flex-col sm:flex-row items-center gap-6 mb-2">
+            <div className="relative w-24 h-24 rounded-full overflow-hidden bg-muted flex items-center justify-center border shrink-0">
+              {formData.avatar ? (
+                <Image src={formData.avatar} alt="Avatar" fill className="object-cover" />
+              ) : (
+                <UserCircle className="w-12 h-12 text-muted-foreground opacity-50" />
+              )}
+            </div>
+            <div className="flex flex-col gap-2 text-center sm:text-left">
+              <Label className="text-base font-medium">Foto de Perfil</Label>
+              <div className="flex items-center justify-center sm:justify-start gap-2">
+                <Button 
+                  type="button" 
+                  variant="outline" 
+                  size="sm"
+                  onClick={() => fileInputRef.current?.click()}
+                >
+                  Cambiar Imagen
+                </Button>
+                {formData.avatar && (
+                  <Button 
+                    type="button" 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                    onClick={() => updateField('avatar', '')}
+                  >
+                    Eliminar
+                  </Button>
+                )}
+              </div>
+              <input 
+                type="file" 
+                ref={fileInputRef} 
+                onChange={handleAvatarChange} 
+                accept="image/*" 
+                className="hidden" 
+              />
+              <p className="text-xs text-muted-foreground mt-1">Recomendado: 256x256px (JPG o PNG)</p>
+            </div>
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-2">
               <Label htmlFor="name" className="flex items-center gap-2">
