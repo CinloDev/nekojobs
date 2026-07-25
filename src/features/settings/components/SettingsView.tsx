@@ -106,7 +106,7 @@ export function SettingsView() {
   }
 
   return (
-    <div className="max-w-[800px] mx-auto py-8 px-4 w-full">
+    <div className="max-w-[800px] mx-auto w-full space-y-8">
       <PageHeader 
         title="Configuración" 
         description="Administra tu perfil y preferencias personales."

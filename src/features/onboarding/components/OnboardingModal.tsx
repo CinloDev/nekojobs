@@ -69,33 +69,33 @@ export function OnboardingModal() {
     <Dialog open={isOpen} onOpenChange={(open) => {
       if (!open) handleClose();
     }}>
-      <DialogContent className="sm:max-w-[500px]">
+      <DialogContent className="w-[95vw] sm:max-w-[500px] max-h-[90dvh] overflow-y-auto rounded-xl p-4 sm:p-6">
         <DialogHeader>
-          <div className="flex justify-center mb-4 mt-2">
-            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center">
-              <Sparkles className="w-8 h-8 text-primary" />
+          <div className="flex justify-center mb-2 sm:mb-4 mt-1">
+            <div className="w-12 h-12 sm:w-16 sm:h-16 bg-primary/10 rounded-full flex items-center justify-center">
+              <Sparkles className="w-6 h-6 sm:w-8 sm:h-8 text-primary" />
             </div>
           </div>
-          <DialogTitle className="text-2xl text-center font-bold tracking-tight">
+          <DialogTitle className="text-xl sm:text-2xl text-center font-bold tracking-tight">
             ¡Bienvenido a NekoJobs!
           </DialogTitle>
-          <DialogDescription className="text-center pt-2 text-base">
+          <DialogDescription className="text-center pt-1.5 sm:pt-2 text-sm sm:text-base">
             El sistema operativo para tu búsqueda laboral. Totalmente privado y enfocado en potenciar tu carrera profesional.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="grid gap-4 py-4 mt-2">
-          <div className="flex flex-col gap-2 p-4 bg-muted/40 rounded-lg border border-border/50 text-sm">
-            <p><strong>🏠 Arquitectura Local-first:</strong> Toda tu información se guarda únicamente en este navegador. No hay servidores ni bases de datos externas husmeando en tu progreso.</p>
+        <div className="grid gap-3 py-2 sm:py-4">
+          <div className="flex flex-col gap-2 p-3 sm:p-4 bg-muted/40 rounded-lg border border-border/50 text-xs sm:text-sm leading-relaxed">
+            <p><strong>🏠 Arquitectura Local-first:</strong> Toda tu información se guarda únicamente en este navegador. No hay servidores externos husmeando en tu progreso.</p>
             <p><strong>📊 Métricas en tiempo real:</strong> Analiza tus embudos de conversión, fuentes de entrevistas y optimiza tus postulaciones.</p>
             <p><strong>🎯 Orientado a la acción:</strong> Fija objetivos semanales y documenta lo que aprendes en cada entrevista.</p>
           </div>
         </div>
 
-        <DialogFooter className="sm:justify-between mt-4">
+        <DialogFooter className="flex flex-col sm:flex-row gap-2.5 sm:justify-between mt-2 sm:mt-4">
           <Button 
             variant="outline" 
-            className="w-full sm:w-auto" 
+            className="w-full sm:w-auto text-xs sm:text-sm py-5 sm:py-2" 
             onClick={handleLoadDemo}
             disabled={isLoadingDemo}
           >
@@ -107,7 +107,7 @@ export function OnboardingModal() {
             Cargar datos de prueba
           </Button>
           <Button 
-            className="w-full sm:w-auto" 
+            className="w-full sm:w-auto text-xs sm:text-sm py-5 sm:py-2" 
             onClick={handleStartBlank}
             disabled={isLoadingDemo}
           >
