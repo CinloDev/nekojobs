@@ -101,3 +101,37 @@ export interface Goal {
   endDate: string;
   status: 'Active' | 'Completed' | 'Failed';
 }
+
+export type ProjectStatus =
+  | 'Prospecto'
+  | 'Propuesta Enviada'
+  | 'Negociando'
+  | 'Activo'
+  | 'En Revisión'
+  | 'Completado'
+  | 'Cancelado';
+
+export type ProjectType = 'Website' | 'Web App' | 'Maintenance' | 'Consulting' | 'Other';
+export type ProjectCurrency = 'ARS' | 'USD';
+export type ProjectPaymentStatus = 'Pendiente' | 'Parcial' | 'Pagado';
+
+export interface Project {
+  id: string;
+  projectName: string;
+  clientName: string;
+  clientId?: string;
+  type: ProjectType;
+  status: ProjectStatus;
+  description?: string;
+  budget?: number;
+  paidAmount?: number;
+  currency?: ProjectCurrency;
+  paymentStatus: ProjectPaymentStatus;
+  startDate?: string;
+  endDate?: string;
+  technologies: string[];
+  notes?: string;
+  url?: string;
+  createdAt: string;
+  updatedAt: string;
+}
