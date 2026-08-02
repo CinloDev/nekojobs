@@ -202,7 +202,7 @@ export function ProjectFormModal({ open, onOpenChange, projectToEdit }: ProjectF
               <Select
                 disabled={isSaving}
                 value={formData.status}
-                onValueChange={(val: ProjectStatus) => setFormData({ ...formData, status: val })}
+                onValueChange={(val) => setFormData({ ...formData, status: val as ProjectStatus })}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecciona estado" />
@@ -221,7 +221,7 @@ export function ProjectFormModal({ open, onOpenChange, projectToEdit }: ProjectF
               <Select
                 disabled={isSaving}
                 value={formData.type}
-                onValueChange={(val: ProjectType) => setFormData({ ...formData, type: val })}
+                onValueChange={(val) => setFormData({ ...formData, type: val as ProjectType })}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Selecciona tipo" />
@@ -257,7 +257,7 @@ export function ProjectFormModal({ open, onOpenChange, projectToEdit }: ProjectF
               <Select
                 disabled={isSaving}
                 value={formData.currency}
-                onValueChange={(val: ProjectCurrency) => setFormData({ ...formData, currency: val })}
+                onValueChange={(val) => setFormData({ ...formData, currency: val as ProjectCurrency })}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Moneda" />
@@ -276,8 +276,8 @@ export function ProjectFormModal({ open, onOpenChange, projectToEdit }: ProjectF
               <Select
                 disabled={isSaving}
                 value={formData.paymentStatus}
-                onValueChange={(val: ProjectPaymentStatus) => {
-                  setFormData({ ...formData, paymentStatus: val, paidAmount: val !== 'Parcial' ? undefined : formData.paidAmount });
+                onValueChange={(val) => {
+                  setFormData({ ...formData, paymentStatus: val as ProjectPaymentStatus, paidAmount: val !== 'Parcial' ? undefined : formData.paidAmount });
                 }}
               >
                 <SelectTrigger>

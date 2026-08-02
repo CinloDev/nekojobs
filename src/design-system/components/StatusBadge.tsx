@@ -53,8 +53,8 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
   return (
     <span
       className={cn(
-        'inline-flex items-center rounded-xs px-2 py-0.5 text-caption font-medium border',
-        statusStyles[status] || 'bg-muted text-text-secondary border-border-default',
+        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset',
+        statusStyles[status] || 'bg-muted/10 text-text-secondary border-border-default',
         className
       )}
     >

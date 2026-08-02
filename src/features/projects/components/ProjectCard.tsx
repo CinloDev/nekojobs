@@ -16,6 +16,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { ItemCard } from '@/components/ui/ItemCard';
 
 interface ProjectCardProps {
   project: Project;
@@ -63,82 +64,82 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
     }
   };
 
-  return (
-    <div className="group flex flex-col rounded-xl border bg-card text-card-foreground shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden">
-      {/* Header */}
-      <div className="p-5 pb-4 flex justify-between items-start gap-4">
-        <div className="space-y-1">
-          <h3 className="font-semibold text-lg leading-tight tracking-tight flex items-center gap-2">
-            <FolderKanban className="w-4 h-4 text-primary/60" />
-            {project.projectName}
-          </h3>
-          <p className="text-sm text-muted-foreground">{project.clientName}</p>
-        </div>
-        
-        <div className="flex items-center gap-2">
-          <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${getStatusColor(project.status)}`}>
-            {project.status}
+  const badge = (
+    <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${getStatusColor(project.status)}`}>
+      {project.status}
+    </span>
+  );
+
+  const actions = (
+    <DropdownMenu>
+      <DropdownMenuTrigger className="p-1 hover:bg-accent rounded-md transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
+        <MoreVertical className="w-4 h-4 text-muted-foreground" />
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        <DropdownMenuItem onClick={() => onEdit(project)} className="cursor-pointer">
+          <Pencil className="w-4 h-4 mr-2" /> Editar
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={handleDelete} className="cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10">
+          <Trash2 className="w-4 h-4 mr-2" /> Eliminar
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+
+  const footer = (project.budget !== undefined || project.paymentStatus !== 'Pendiente') ? (
+    <>
+      <div className="flex justify-between items-center">
+        {getPaymentBadge()}
+        {project.budget !== undefined && project.currency && (
+          <span className="font-bold text-base flex items-center gap-1">
+            {project.currency} {project.budget.toLocaleString()}
           </span>
-
-          <DropdownMenu>
-            <DropdownMenuTrigger className="opacity-0 group-hover:opacity-100 focus:opacity-100 transition-opacity p-1 hover:bg-accent rounded-md">
-              <MoreVertical className="w-4 h-4 text-muted-foreground" />
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem onClick={() => onEdit(project)} className="cursor-pointer">
-                <Pencil className="w-4 h-4 mr-2" /> Editar
-              </DropdownMenuItem>
-              <DropdownMenuItem onClick={handleDelete} className="cursor-pointer text-destructive focus:text-destructive focus:bg-destructive/10">
-                <Trash2 className="w-4 h-4 mr-2" /> Eliminar
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        </div>
-      </div>
-
-      {/* Body */}
-      <div className="px-5 pb-4 flex-1">
-        <div className="text-sm text-muted-foreground mb-4 font-medium bg-accent/50 inline-block px-2 py-1 rounded-md">
-          {project.type}
-        </div>
-        
-        {project.technologies && project.technologies.length > 0 && (
-          <div className="flex items-start gap-2 text-sm text-muted-foreground">
-            <Code2 className="w-4 h-4 mt-0.5 shrink-0 opacity-70" />
-            <div className="flex flex-wrap gap-1.5">
-              {project.technologies.slice(0, 3).map(tech => (
-                <span key={tech} className="bg-secondary px-1.5 py-0.5 rounded text-xs">{tech}</span>
-              ))}
-              {project.technologies.length > 3 && (
-                <span className="bg-secondary px-1.5 py-0.5 rounded text-xs">+{project.technologies.length - 3}</span>
-              )}
-            </div>
-          </div>
         )}
       </div>
-
-      {/* Footer / Finances */}
-      {(project.budget !== undefined || project.paymentStatus !== 'Pendiente') && (
-        <div className="px-5 py-4 bg-muted/30 border-t flex flex-col gap-2">
-          <div className="flex justify-between items-center">
-            {getPaymentBadge()}
-            {project.budget !== undefined && project.currency && (
-              <span className="font-bold text-base flex items-center gap-1">
-                {project.currency} {project.budget.toLocaleString()}
-              </span>
-            )}
-          </div>
-          
-          {project.paymentStatus === 'Parcial' && project.paidAmount && project.budget && (
-            <div className="flex justify-between items-center text-xs mt-1 pt-2 border-t border-border/50">
-              <span className="text-muted-foreground">Restante:</span>
-              <span className="font-medium text-amber-600 dark:text-amber-400">
-                {project.currency} {(project.budget - project.paidAmount).toLocaleString()}
-              </span>
-            </div>
-          )}
+      
+      {project.paymentStatus === 'Parcial' && project.paidAmount && project.budget && (
+        <div className="flex justify-between items-center text-xs mt-1 pt-2 border-t border-border/50">
+          <span className="text-muted-foreground">Restante:</span>
+          <span className="font-medium text-amber-600 dark:text-amber-400">
+            {project.currency} {(project.budget - project.paidAmount).toLocaleString()}
+          </span>
         </div>
       )}
-    </div>
+    </>
+  ) : undefined;
+
+  return (
+    <ItemCard
+      title={
+        <div className="flex items-start gap-2">
+          <FolderKanban className="w-4 h-4 text-primary/60 shrink-0 mt-1" />
+          <div className="flex-1 min-w-0">
+            <div className="line-clamp-2">{project.projectName}</div>
+          </div>
+        </div>
+      }
+      subtitle={project.clientName}
+      badge={badge}
+      actions={actions}
+      footer={footer}
+    >
+      <div className="text-sm text-muted-foreground mb-4 font-medium bg-accent/50 w-fit px-2 py-1 rounded-md">
+        {project.type}
+      </div>
+      
+      {project.technologies && project.technologies.length > 0 && (
+        <div className="flex items-start gap-2 text-sm text-muted-foreground">
+          <Code2 className="w-4 h-4 mt-0.5 shrink-0 opacity-70" />
+          <div className="flex flex-wrap gap-1.5">
+            {project.technologies.slice(0, 3).map(tech => (
+              <span key={tech} className="bg-secondary px-1.5 py-0.5 rounded text-xs">{tech}</span>
+            ))}
+            {project.technologies.length > 3 && (
+              <span className="bg-secondary px-1.5 py-0.5 rounded text-xs">+{project.technologies.length - 3}</span>
+            )}
+          </div>
+        </div>
+      )}
+    </ItemCard>
   );
 }

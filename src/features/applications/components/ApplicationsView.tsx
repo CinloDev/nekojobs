@@ -9,6 +9,7 @@ import { Application, ApplicationStatus } from '@/types';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, SearchX } from 'lucide-react';
 import { EmptyState } from '@/components/ui/EmptyState';
+import { PageHeader } from '@/components/ui/PageHeader';
 import { toast } from 'sonner';
 import {
   Dialog,
@@ -62,6 +63,10 @@ export function ApplicationsView() {
 
   return (
     <div className="space-y-6">
+      <PageHeader 
+        title="Postulaciones" 
+        description="Gestiona y haz seguimiento de todas tus aplicaciones laborales." 
+      />
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <ApplicationFilters 
           searchQuery={searchQuery}
@@ -78,7 +83,7 @@ export function ApplicationsView() {
       {applications.length === 0 ? (
         <EmptyState onAction={handleCreate} />
       ) : filteredApps.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
           {filteredApps.map(app => (
             <ApplicationCard 
               key={app.id} 
