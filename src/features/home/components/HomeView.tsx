@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useJobStore } from '@/features/applications/store/useJobStore';
+import { useProjectStore } from '@/features/projects/store/useProjectStore';
 import { useUserStore } from '@/store/useUserStore';
 import { HomeHeader } from './HomeHeader';
 import { WeeklyGoalWidget } from './WeeklyGoalWidget';
@@ -13,14 +14,16 @@ import { NekoInsightsWidget } from './NekoInsightsWidget';
 import { RecentLearningsWidget } from './RecentLearningsWidget';
 
 export function HomeView() {
-  const { loadApplications, isLoading } = useJobStore();
+  const { loadApplications, isLoading: isLoadingApps } = useJobStore();
+  const { loadProjects, isLoading: isLoadingProjects } = useProjectStore();
   const { profile } = useUserStore();
 
   useEffect(() => {
     loadApplications();
-  }, [loadApplications]);
+    loadProjects();
+  }, [loadApplications, loadProjects]);
 
-  if (isLoading && !profile?.name) {
+  if ((isLoadingApps || isLoadingProjects) && !profile?.name) {
     return <div className="p-8 h-full flex items-center justify-center">Cargando tu espacio...</div>;
   }
 

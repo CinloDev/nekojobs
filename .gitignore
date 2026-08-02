@@ -39,3 +39,15 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# ==========================
+# Neko Workspace
+# ==========================
+.neko/
+neko.local.yaml
+.neko.local/
+neko.workspace.yaml
+
+
+# Gentle AI / local agent metadata
+.atl/
