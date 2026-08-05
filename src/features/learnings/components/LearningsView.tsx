@@ -8,7 +8,7 @@ import { LearningFormModal } from './LearningFormModal';
 import { Learning } from '@/types';
 import { Button } from '@/components/ui/button';
 import { PlusCircle } from 'lucide-react';
-import { EmptyState } from '@/components/ui/EmptyState';
+import { EmptyState } from '@/components/layout/EmptyState';
 import {
   Dialog,
   DialogContent,
@@ -18,7 +18,7 @@ import {
   DialogFooter,
 } from "@/components/ui/dialog";
 import { toast } from 'sonner';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageHeader } from '@/components/layout/PageHeader';
 
 export function LearningsView() {
   const { learnings, loadLearnings, deleteLearning } = useLearningStore();
@@ -57,7 +57,7 @@ export function LearningsView() {
   );
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <PageHeader
         title="Diario de Aprendizaje"
         description="Registra lo que aprendes en cada entrevista y mejora continuamente."

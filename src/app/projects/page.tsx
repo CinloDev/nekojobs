@@ -1,4 +1,5 @@
 import { ProjectView } from '@/features/projects/components/ProjectView';
+import { PageContainer } from '@/components/layout/PageContainer';
 
 export const metadata = {
   title: 'Proyectos Freelance | NekoJobs',
@@ -7,8 +8,8 @@ export const metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="p-6 md:p-8 flex-1 w-full max-w-7xl mx-auto">
+    <PageContainer>
       <ProjectView />
-    </div>
+    </PageContainer>
   );
 }

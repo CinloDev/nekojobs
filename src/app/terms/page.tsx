@@ -1,10 +1,11 @@
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageContainer } from '@/components/layout/PageContainer';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { Card, CardContent } from '@/components/ui/card';
 import { ScrollText, ShieldCheck, CheckCircle2 } from 'lucide-react';
 
 export default function TermsPage() {
   return (
-    <div className="px-4 py-8 md:p-8 max-w-4xl mx-auto space-y-6">
+    <PageContainer size="narrow" className="space-y-6">
       <PageHeader 
         title="Términos de Servicio" 
         description="Condiciones de uso para el sistema de gestión de búsqueda laboral NekoJobs." 
@@ -47,6 +48,6 @@ export default function TermsPage() {
 
         </CardContent>
       </Card>
-    </div>
+    </PageContainer>
   );
 }

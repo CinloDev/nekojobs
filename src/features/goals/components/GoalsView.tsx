@@ -8,7 +8,7 @@ import { GoalFormModal } from './GoalFormModal';
 import { Goal } from '@/types';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, Target } from 'lucide-react';
-import { EmptyState } from '@/components/ui/EmptyState';
+import { EmptyState } from '@/components/layout/EmptyState';
 import {
   Dialog,
   DialogContent,
@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from 'sonner';
 
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageHeader } from '@/components/layout/PageHeader';
 
 export function GoalsView() {
   const { goals, loadGoals, deleteGoal } = useGoalStore();
@@ -53,7 +53,7 @@ export function GoalsView() {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <PageHeader
         title="Metas Activas"
         description="Sigue el progreso de tus objetivos."

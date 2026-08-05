@@ -1,9 +1,10 @@
 import { HomeView } from "@/features/home/components/HomeView";
+import { PageContainer } from "@/components/layout/PageContainer";
 
 export default function Home() {
   return (
-    <div className="h-full">
+    <PageContainer>
       <HomeView />
-    </div>
+    </PageContainer>
   );
 }
