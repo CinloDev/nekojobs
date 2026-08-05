@@ -23,7 +23,8 @@ export const useJobStore = create<JobState>((set) => ({
     set({ isLoading: true, error: null });
     try {
       const apps = await repository.getAll();
-      set({ applications: apps, isLoading: false });
+      const sortedApps = apps.sort((a, b) => new Date(b.appliedAt).getTime() - new Date(a.appliedAt).getTime());
+      set({ applications: sortedApps, isLoading: false });
     } catch {
       set({ error: 'Error loading applications', isLoading: false });
     }
@@ -32,7 +33,7 @@ export const useJobStore = create<JobState>((set) => ({
   addApplication: async (app: Application) => {
     try {
       await repository.create(app);
-      set((state) => ({ applications: [...state.applications, app] }));
+      set((state) => ({ applications: [app, ...state.applications] }));
     } catch {
       set({ error: 'Error adding application' });
     }
