@@ -1,5 +1,6 @@
 import { Project } from '@/types';
 import { ProjectRepository } from './projectRepository';
+import { migrateProject } from './migrations';
 
 const STORAGE_KEY = 'nekojobs_projects';
 
@@ -11,7 +12,8 @@ export class LocalProjectRepository implements ProjectRepository {
     if (!data) return [];
     
     try {
-      return JSON.parse(data) as Project[];
+      const parsedData = JSON.parse(data) as any[];
+      return parsedData.map(migrateProject);
     } catch (e) {
       console.error('Error parsing projects from localStorage', e);
       return [];

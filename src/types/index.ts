@@ -102,36 +102,55 @@ export interface Goal {
   status: 'Active' | 'Completed' | 'Failed';
 }
 
+export type ProjectCategory = 'personal' | 'freelance' | 'open_source' | 'client';
+
 export type ProjectStatus =
-  | 'Prospecto'
-  | 'Propuesta Enviada'
-  | 'Negociando'
-  | 'Activo'
-  | 'En Revisión'
-  | 'Completado'
-  | 'Cancelado';
+  // General status
+  | 'idea'
+  | 'planning'
+  | 'in_progress'
+  | 'on_hold'
+  | 'completed'
+  | 'cancelled'
+  | 'maintenance'
+  // Business status (Freelance/Client)
+  | 'prospect'
+  | 'proposal_sent'
+  | 'negotiating'
+  | 'in_review';
 
 export type ProjectType = 'Website' | 'Web App' | 'Maintenance' | 'Consulting' | 'Other';
 export type ProjectCurrency = 'ARS' | 'USD';
 export type ProjectPaymentStatus = 'Pendiente' | 'Parcial' | 'Pagado';
 
+export interface ProjectNote {
+  id: string;
+  content: string;
+  createdAt: string;
+}
+
 export interface Project {
   id: string;
   projectName: string;
-  clientName: string;
-  clientId?: string;
-  type: ProjectType;
+  category: ProjectCategory;
   status: ProjectStatus;
-  description?: string;
+  type: ProjectType;
+  
+  // Opcionales según categoría
+  clientName?: string;
+  clientId?: string;
   budget?: number;
   paidAmount?: number;
   currency?: ProjectCurrency;
-  paymentStatus: ProjectPaymentStatus;
+  paymentStatus?: ProjectPaymentStatus;
+  
+  // Generales
+  description?: string;
+  technologies: string[];
+  notes?: ProjectNote[];
+  url?: string;
   startDate?: string;
   endDate?: string;
-  technologies: string[];
-  notes?: string;
-  url?: string;
   createdAt: string;
   updatedAt: string;
 }
