@@ -1,4 +1,5 @@
 import { LearningsView } from "@/features/learnings/components/LearningsView";
+import { PageContainer } from "@/components/layout/PageContainer";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -7,8 +8,8 @@ export const metadata: Metadata = {
 
 export default function LearningsPage() {
   return (
-    <div className="px-4 py-8 md:p-8 h-full">
+    <PageContainer>
       <LearningsView />
-    </div>
+    </PageContainer>
   );
 }

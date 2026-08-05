@@ -28,7 +28,7 @@ export function HomeView() {
   }
 
   return (
-    <div className="px-4 py-8 md:p-8 max-w-[1400px] mx-auto min-h-full">
+    <div className="space-y-8 animate-in fade-in duration-500">
       <HomeHeader />
 
       {/* General Metrics Row */}

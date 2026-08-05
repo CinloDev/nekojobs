@@ -12,7 +12,8 @@ import { UserCircle, Target, Briefcase, MapPin, Code2, Save, Check, Loader2 } fr
 import { cn } from '@/lib/utils';
 import { motion, AnimatePresence } from 'framer-motion';
 import { DataManagementSection } from '@/features/data-management/components/DataManagementSection';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageHeader } from '@/components/layout/PageHeader';
+import { SectionHeader } from '@/components/layout/SectionHeader';
 
 const levels = ['Trainee', 'Junior', 'Junior+', 'Semi Senior', 'Senior', 'Lead'];
 
@@ -106,17 +107,18 @@ export function SettingsView() {
   }
 
   return (
-    <div className="max-w-[800px] mx-auto w-full space-y-8">
+    <div className="w-full space-y-8 animate-in fade-in duration-500">
       <PageHeader 
         title="Configuración" 
         description="Administra tu perfil y preferencias personales."
       />
 
       <div className="bg-card border rounded-xl p-6 shadow-sm">
-        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-          <UserCircle className="w-5 h-5 text-primary" />
-          Perfil de Usuario
-        </h2>
+        <SectionHeader 
+          title="Perfil de Usuario" 
+          icon={<UserCircle className="w-5 h-5" />} 
+          className="mb-6"
+        />
         
         <form onSubmit={handleSubmit} className="flex flex-col gap-6">
           {/* Avatar Section */}

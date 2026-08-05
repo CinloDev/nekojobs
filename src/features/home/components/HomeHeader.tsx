@@ -1,7 +1,7 @@
 import { useUserStore } from '@/store/useUserStore';
 import { useJobStore } from '@/features/applications/store/useJobStore';
 import { differenceInDays } from 'date-fns';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageHeader } from '@/components/layout/PageHeader';
 
 export function HomeHeader() {
   const { profile } = useUserStore();

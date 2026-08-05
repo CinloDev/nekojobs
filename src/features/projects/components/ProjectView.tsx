@@ -5,7 +5,7 @@ import { useProjectStore } from '../store/useProjectStore';
 import { ProjectFormModal } from './ProjectFormModal';
 import { ProjectCard } from './ProjectCard';
 import { Project, ProjectCategory } from '@/types';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, Folder, Briefcase, Globe, Users } from 'lucide-react';
 import { cn } from '@/lib/utils';
