@@ -1,6 +1,7 @@
 import { Project, ProjectStatus } from '@/types';
 import { useProjectStore } from '../store/useProjectStore';
 import { toast } from 'sonner';
+import { useRouter } from 'next/navigation';
 import { 
   MoreVertical, 
   Pencil, 
@@ -25,6 +26,11 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onEdit }: ProjectCardProps) {
   const { deleteProject } = useProjectStore();
+  const router = useRouter();
+
+  const handleCardClick = () => {
+    router.push(`/projects/${project.id}`);
+  };
 
   const handleDelete = async () => {
     if (window.confirm(`¿Estás seguro de que deseas eliminar el proyecto "${project.projectName}"?`)) {
@@ -39,18 +45,38 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
 
   const getStatusColor = (status: ProjectStatus) => {
     switch (status) {
-      case 'Activo':
+      case 'in_progress':
         return 'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300 ring-blue-500/20';
-      case 'Completado':
+      case 'completed':
         return 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300 ring-emerald-500/20';
-      case 'Cancelado':
+      case 'cancelled':
         return 'bg-red-100 text-red-700 dark:bg-red-900/40 dark:text-red-300 ring-red-500/20';
-      case 'Negociando':
-      case 'Propuesta Enviada':
+      case 'negotiating':
+      case 'proposal_sent':
         return 'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300 ring-amber-500/20';
+      case 'planning':
+      case 'idea':
+        return 'bg-purple-100 text-purple-700 dark:bg-purple-900/40 dark:text-purple-300 ring-purple-500/20';
       default:
         return 'bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-300 ring-slate-500/20';
     }
+  };
+
+  const getStatusLabel = (status: ProjectStatus) => {
+    const labels: Record<ProjectStatus, string> = {
+      idea: 'Idea',
+      planning: 'Planificación',
+      in_progress: 'En Progreso',
+      on_hold: 'Pausado',
+      completed: 'Completado',
+      cancelled: 'Cancelado',
+      maintenance: 'Mantenimiento',
+      prospect: 'Prospecto',
+      proposal_sent: 'Propuesta Enviada',
+      negotiating: 'Negociando',
+      in_review: 'En Revisión'
+    };
+    return labels[status] || status;
   };
 
   const getPaymentBadge = () => {
@@ -66,15 +92,16 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
 
   const badge = (
     <span className={`inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-semibold ring-1 ring-inset ${getStatusColor(project.status)}`}>
-      {project.status}
+      {getStatusLabel(project.status)}
     </span>
   );
 
   const actions = (
-    <DropdownMenu>
-      <DropdownMenuTrigger className="p-1 hover:bg-accent rounded-md transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
-        <MoreVertical className="w-4 h-4 text-muted-foreground" />
-      </DropdownMenuTrigger>
+    <div onClick={(e) => e.stopPropagation()}>
+      <DropdownMenu>
+        <DropdownMenuTrigger className="p-1 hover:bg-accent rounded-md transition-colors outline-none focus-visible:ring-2 focus-visible:ring-ring">
+          <MoreVertical className="w-4 h-4 text-muted-foreground" />
+        </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuItem onClick={() => onEdit(project)} className="cursor-pointer">
           <Pencil className="w-4 h-4 mr-2" /> Editar
@@ -84,9 +111,12 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    </div>
   );
 
-  const footer = (project.budget !== undefined || project.paymentStatus !== 'Pendiente') ? (
+  const isB2B = project.category === 'freelance' || project.category === 'client';
+  
+  const footer = isB2B && (project.budget !== undefined || project.paymentStatus !== 'Pendiente') ? (
     <>
       <div className="flex justify-between items-center">
         {getPaymentBadge()}
@@ -109,7 +139,8 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
   ) : undefined;
 
   return (
-    <ItemCard
+    <div onClick={handleCardClick} className="block cursor-pointer h-full transition-transform active:scale-[0.99]">
+      <ItemCard
       title={
         <div className="flex items-start gap-2">
           <FolderKanban className="w-4 h-4 text-primary/60 shrink-0 mt-1" />
@@ -118,7 +149,7 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
           </div>
         </div>
       }
-      subtitle={project.clientName}
+      subtitle={isB2B ? project.clientName : undefined}
       badge={badge}
       actions={actions}
       footer={footer}
@@ -141,5 +172,6 @@ export function ProjectCard({ project, onEdit }: ProjectCardProps) {
         </div>
       )}
     </ItemCard>
+    </div>
   );
 }

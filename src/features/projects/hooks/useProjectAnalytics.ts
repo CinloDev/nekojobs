@@ -14,24 +14,24 @@ export function useProjectAnalytics() {
     let pendingPaymentsUSD = 0;
     let pendingPaymentsARS = 0;
 
-    const leadStatuses = ['Prospecto', 'Propuesta Enviada', 'Negociando'];
+    const leadStatuses = ['prospect', 'proposal_sent', 'negotiating'];
 
     projects.forEach((project) => {
       // Counts
-      if (project.status === 'Activo') {
+      if (project.status === 'in_progress') {
         activeCount++;
       } else if (leadStatuses.includes(project.status)) {
         leadsCount++;
       }
 
       // Expected Revenue (Active projects budget)
-      if (project.status === 'Activo' && project.budget) {
+      if (project.status === 'in_progress' && project.budget) {
         if (project.currency === 'USD') expectedRevenueUSD += project.budget;
         else if (project.currency === 'ARS') expectedRevenueARS += project.budget;
       }
 
       // Pending Payments
-      if (['Pendiente', 'Parcial'].includes(project.paymentStatus) && project.budget) {
+      if (project.paymentStatus && ['Pendiente', 'Parcial'].includes(project.paymentStatus) && project.budget) {
         let amountOwed = project.budget;
         if (project.paymentStatus === 'Parcial' && project.paidAmount) {
           amountOwed = project.budget - project.paidAmount;
