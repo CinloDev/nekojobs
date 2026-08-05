@@ -1,10 +1,11 @@
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageContainer } from '@/components/layout/PageContainer';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { Card, CardContent } from '@/components/ui/card';
 import { Lock, ServerOff, ShieldAlert, EyeOff } from 'lucide-react';
 
 export default function PrivacyPage() {
   return (
-    <div className="px-4 py-8 md:p-8 max-w-4xl mx-auto space-y-6">
+    <PageContainer size="narrow" className="space-y-6">
       <PageHeader 
         title="Política de Privacidad" 
         description="Nuestras garantías innegociables sobre el manejo, resguardo y protección de tus datos profesionales." 
@@ -54,6 +55,6 @@ export default function PrivacyPage() {
 
         </CardContent>
       </Card>
-    </div>
+    </PageContainer>
   );
 }

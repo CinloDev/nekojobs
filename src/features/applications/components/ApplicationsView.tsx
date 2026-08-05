@@ -8,8 +8,8 @@ import { ApplicationFormModal } from './ApplicationFormModal';
 import { Application, ApplicationStatus } from '@/types';
 import { Button } from '@/components/ui/button';
 import { PlusCircle, SearchX } from 'lucide-react';
-import { EmptyState } from '@/components/ui/EmptyState';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { EmptyState } from '@/components/layout/EmptyState';
+import { PageHeader } from '@/components/layout/PageHeader';
 import { toast } from 'sonner';
 import {
   Dialog,

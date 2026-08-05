@@ -1,9 +1,10 @@
 import { SettingsView } from '@/features/settings/components/SettingsView';
+import { PageContainer } from '@/components/layout/PageContainer';
 
 export default function SettingsPage() {
   return (
-    <div className="px-4 py-8 md:p-8 h-full">
+    <PageContainer size="narrow">
       <SettingsView />
-    </div>
+    </PageContainer>
   );
 }

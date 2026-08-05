@@ -8,9 +8,9 @@ import { PipelineFunnel } from './PipelineFunnel';
 import { PerformanceCards } from './PerformanceCards';
 import { SourcesBreakdown } from './SourcesBreakdown';
 import { TimelineStats } from './TimelineStats';
-import { EmptyState } from '@/components/ui/EmptyState';
+import { EmptyState } from '@/components/layout/EmptyState';
 import { useRouter } from 'next/navigation';
-import { PageHeader } from '@/components/ui/PageHeader';
+import { PageHeader } from '@/components/layout/PageHeader';
 
 export function AnalyticsView() {
   const { loadApplications } = useJobStore();
@@ -23,7 +23,7 @@ export function AnalyticsView() {
 
   if (!hasData) {
     return (
-      <div className="max-w-6xl mx-auto space-y-6">
+      <div className="space-y-6 animate-in fade-in duration-500">
         <PageHeader
           title="Estadísticas"
           description="Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo."
@@ -36,7 +36,7 @@ export function AnalyticsView() {
   }
 
   return (
-    <div className="max-w-6xl mx-auto space-y-6">
+    <div className="space-y-6 animate-in fade-in duration-500">
       <PageHeader
         title="Estadísticas"
         description="Insights en tiempo real sobre tu rendimiento en la búsqueda de empleo."
