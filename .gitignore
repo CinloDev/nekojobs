@@ -51,3 +51,5 @@ neko.workspace.yaml
 
 # Gentle AI / local agent metadata
 .atl/
+
+mcp_config.json
