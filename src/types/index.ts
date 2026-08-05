@@ -68,11 +68,11 @@ export interface Interview {
   id: string;
   applicationId: string;
   date: string;
-  type: 'HR' | 'Technical' | 'Cultural' | 'Take-home Challenge';
+  type: 'RRHH' | 'Técnica' | 'Cultural' | 'Prueba Técnica';
   interviewers?: string[];
   notes?: string;
   feedback?: string;
-  status: 'Scheduled' | 'Completed' | 'Cancelled';
+  status: 'Agendada' | 'Completada' | 'Cancelada';
 }
 
 export type LearningCategory = 'Technical' | 'Interview' | 'CV' | 'Soft Skills' | 'Process' | 'Other';
